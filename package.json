@@ -23,8 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "yarn prettier --check --congig ./prettierrc.json ./ && yarn run eslint ./",
-    "lint-fix": "yarn prettier --check --config ./.prettierrc.json ./ && yarn run eslint ./ --fix",
+    "lint": "yarn prettier --check --config ./prettierrc.json ./ && yarn run eslint ./",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
