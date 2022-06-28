@@ -1,5 +1,9 @@
 {
-    "swap_form": {
-        "swap": "Swap"
-    }
+  "swap_form": {
+    "swap": "Swap",
+    "select": "Select Token",
+    "insufficient": "Insufficient {{token}} balance",
+    "connect": "Connect Wallet",
+    "placeholder": "0.0"
+  }
 }
