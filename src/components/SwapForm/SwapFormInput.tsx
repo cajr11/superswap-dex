@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import SwapFormChangeTokenButton from "./SwapFormChangeTokenButton";
 
 
 type SwapFormInputProps = {
@@ -17,7 +18,7 @@ const SwapFormInput = ({ initial }: SwapFormInputProps): JSX.Element => {
           placeholder={t("swap_form.placeholder")}
           type="number"
         />
-        
+        <SwapFormChangeTokenButton initial={initial} />
       </div>
     </div>
   );
