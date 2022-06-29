@@ -5,5 +5,10 @@
     "insufficient": "Insufficient {{token}} balance",
     "connect": "Connect Wallet",
     "placeholder": "0.0"
+  },
+  "nav": {
+    "swap": "Swap",
+    "charts": "Charts",
+    "connect": "Connect Wallet"
   }
 }
