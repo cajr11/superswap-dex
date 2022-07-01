@@ -16,6 +16,6 @@ export default App;
 
 
 const styles = {
-  containerLight: "w-screen h-screen bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700",
+  containerLight: "w-screen h-screen bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 overflow-hidden",
   containerDark: "w-screen h-screen bg-gradient-to-r from-indigo-800 via-blue-900 to-zinc-800"
 }
