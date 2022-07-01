@@ -7,7 +7,7 @@ type SwapFormChangeTokenButtonProps = {
   initial?: boolean;
 };
 
-const SwapFormChangeTokenButton = ({ initial }: SwapFormChangeTokenButtonProps) => {
+const SwapFormChangeTokenButton = ({ initial }: SwapFormChangeTokenButtonProps):JSX.Element => {
   const { t } = useTranslation();
 
   return (
