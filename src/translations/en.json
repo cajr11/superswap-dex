@@ -9,6 +9,15 @@
   "nav": {
     "swap": "Swap",
     "charts": "Charts",
-    "connect": "Connect Wallet"
+    "connect": "Connect Wallet",
+    "dropdown": {
+      "language": "Language",
+      "dark": "Dark Theme",
+      "light": "Light Theme"
+    },
+    "language": {
+      "english": "English",
+      "spanish": "Español"
+    }
   }
 }
