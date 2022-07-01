@@ -5,6 +5,7 @@ import ethLogo from "../../assets/images/eth.png";
 import NavLogo from './NavLogo';
 import NavTabSwitcher from './NavTabSwitcher';
 import useWindowWidth from '../../hooks/useWindowWidth';
+import MoreOptionsDropDown from './MoreOptionsDropDown';
 
 
 
@@ -30,6 +31,7 @@ const NavBar = ():JSX.Element => {
               <button className='bg-orange-300 rounded-2xl p-2 border-2 border-white text-white text-semibold text-sm md:w-40 '>{t("nav.connect")}</button>
               <div className='flex items-center justify-center rounded-2xl py-2 px-3 bg-white'>
                 <DotsHorizontalIcon className='h-5 w-5'/>
+                <MoreOptionsDropDown />
               </div>
             </div>
        </div>
