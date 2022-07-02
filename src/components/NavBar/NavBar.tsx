@@ -13,8 +13,8 @@ const NavBar = ():JSX.Element => {
     const windowWidth = useWindowWidth();
     const isDesktop = windowWidth >= 920;
     const isBigDesktop = windowWidth >= 1250;
-
     const { t } = useTranslation();
+    const [showOptions, setShowOptions] = React.useState(false);
 
 
   return (
@@ -29,9 +29,9 @@ const NavBar = ():JSX.Element => {
                 <ChevronDownIcon className="h-4 w-4" />
               </div>
               <button className='bg-orange-300 rounded-2xl p-2 border-2 border-white text-white text-semibold text-sm md:w-40 '>{t("nav.connect")}</button>
-              <div className='flex items-center justify-center rounded-2xl py-2 px-3 bg-white'>
+              <div className='flex items-center justify-center rounded-2xl py-2 px-3 bg-white' onClick={() => setShowOptions(!showOptions)}>
                 <DotsHorizontalIcon className='h-5 w-5'/>
-                <MoreOptionsDropDown />
+                {showOptions && <MoreOptionsDropDown />}
               </div>
             </div>
        </div>

@@ -15,21 +15,21 @@ const MoreOptionsDropDown = ():JSX.Element => {
        {!changeLanguage && (
         <>
             <button className='w-full text-gray-400 flex justify-between text-sm' onClick={() => setChangeLanguage(true)}>
-                <span>{t("nav.dropdown.language")}</span>
+                <span className='select-none'>{t("nav.dropdown.language")}</span>
                 <GlobeIcon className='h-4 w-4'/>
             </button>
             {!isDark && (
                 <>
-                    <button className='w-full text-gray-400 flex justify-between text-sm'>
-                        <span>{t("nav.dropdown.dark")}</span>
+                    <button className='w-full text-gray-400 flex justify-between text-sm' onClick={() => setIsDark(true)}>
+                        <span className='select-none'>{t("nav.dropdown.dark")}</span>
                         <MoonIcon className='h-4 w-4'/>
                     </button>
                 </>
             )}
             {isDark && (
                 <>
-                    <button className='w-full text-gray-400 flex justify-between text-sm'>
-                        <span>{t("nav.dropdown.light")}</span>
+                    <button className='w-full text-gray-400 flex justify-between text-sm' onClick={() => setIsDark(false)}>
+                        <span className='select-none'>{t("nav.dropdown.light")}</span>
                         <SunIcon className='h-5 w-5'/>
                     </button>
                 </>
@@ -38,15 +38,15 @@ const MoreOptionsDropDown = ():JSX.Element => {
        )}
        {changeLanguage && (
         <span className='h-full flex flex-col justify-between'>
-             <button className='w-full text-gray-400 flex justify-between text-sm mb-1' onClick={() => setChangeLanguage(false)}>
+             <button className='w-full text-gray-400 flex justify-between text-sm mb-1 outline-none' onClick={() => setChangeLanguage(false)}>
                 <ChevronLeftIcon className='h-3 w-3' />
             </button>
-            <button className='w-full text-gray-400 flex justify-between text-sm' onClick={() => setIsSelected("English")}>
-                <span>{t("nav.language.english")}</span>
+            <button className='w-full text-gray-400 flex justify-between text-sm outline-none' onClick={() => setIsSelected("English")}>
+                <span className='select-none'>{t("nav.language.english")}</span>
                 {isSelected === "English" && <CheckIcon className='h-3 w-3'/>}
             </button>
-            <button className='w-full text-gray-400 flex justify-between text-sm' onClick={() => setIsSelected("Spanish")}>
-                <span>{t("nav.language.spanish")}</span>
+            <button className='w-full text-gray-400 flex justify-between text-sm outline-none' onClick={() => setIsSelected("Spanish")}>
+                <span className='select-none'>{t("nav.language.spanish")}</span>
                 {isSelected === "Spanish" && <CheckIcon className='h-3 w-3'/>}
             </button>
         </span>
