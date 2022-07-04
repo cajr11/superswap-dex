@@ -31,8 +31,10 @@ const NavBar = ():JSX.Element => {
                 <ChevronDownIcon className="h-4 w-4" />
               </div>
               <button className={isLight ? styles.lightButton : styles.darkButton}>{t("nav.connect")}</button>
-              <div className='flex items-center justify-center rounded-2xl py-2 px-3 bg-white' onClick={() => setShowOptions(!showOptions)}>
-                <DotsHorizontalIcon className='h-5 w-5'/>
+              <div className='flex items-center justify-center rounded-2xl py-2 px-3 bg-white' >
+                <span className='h-full w-full flex items-center' onClick={() => setShowOptions(!showOptions)}>
+                  <DotsHorizontalIcon className='h-5 w-5'/>
+                </span>
                 {showOptions && <MoreOptionsDropDown />}
               </div>
             </div>

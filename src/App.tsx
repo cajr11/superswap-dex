@@ -7,7 +7,7 @@ import ThemeContext from "./context/theme-context";
 
 function App():JSX.Element {
   const { isLight } = React.useContext(ThemeContext)
-  const { authenticate, isAuthenticated, isAuthenticating, user, account, logout } = useMoralis();
+  // const { authenticate, isAuthenticated, isAuthenticating, user, account, logout } = useMoralis();
 
 
   // useEffect(() => {
