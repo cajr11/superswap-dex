@@ -4,7 +4,7 @@ import ThemeContext from "../../context/theme-context";
 
 const SwapButton = (): JSX.Element => {
   const { t } = useTranslation();
-  const { isLight } = React.useContext(ThemeContext)
+  const { isLight } = React.useContext(ThemeContext);
 
   return (
     <div className={isLight ? styles.lightContainer : styles.darkContainer}>
@@ -18,8 +18,10 @@ const SwapButton = (): JSX.Element => {
 const styles = {
   lightContainer: "border-orange-300 h-16 w-full rounded-3xl",
   darkContainer: "border-blue-500 h-16 w-full rounded-3xl",
-  lightButton: "h-full w-full rounded-3xl flex justify-center items-center bg-orange-500 text-white font-semibold",
-  darkButton: "h-full w-full rounded-3xl flex justify-center items-center bg-blue-500 text-white font-semibold"
-}
+  lightButton:
+    "h-full w-full rounded-3xl flex justify-center items-center bg-orange-500 text-white font-semibold",
+  darkButton:
+    "h-full w-full rounded-3xl flex justify-center items-center bg-blue-500 text-white font-semibold",
+};
 
 export default SwapButton;
