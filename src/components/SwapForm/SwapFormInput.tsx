@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import SwapFormChangeTokenButton from "./SwapFormChangeTokenButton";
 
 
+
 type SwapFormInputProps = {
   initial?: boolean;
 };
@@ -23,5 +24,6 @@ const SwapFormInput = ({ initial }: SwapFormInputProps): JSX.Element => {
     </div>
   );
 };
+
 
 export default SwapFormInput;
