@@ -3,16 +3,21 @@ import SwapFormHeader from "./SwapFormHeader";
 import SwapFormInput from "./SwapFormInput";
 import SwapButton from "./SwapButton";
 import ThemeContext from "../../context/theme-context";
+import { TokenList } from "../../types";
 
-const SwapForm = (): JSX.Element => {
+type SwapFormProps = {
+  tokenList: TokenList;
+};
+
+const SwapForm = ({ tokenList }: SwapFormProps): JSX.Element => {
   const { isLight } = React.useContext(ThemeContext);
 
   return (
     <form className={isLight ? styles.light : styles.dark}>
       <div className="w-full rounded-3xl p-2 select-none">
         <SwapFormHeader />
-        <SwapFormInput initial={true} />
-        <SwapFormInput />
+        <SwapFormInput initial={true} tokenList={tokenList} />
+        <SwapFormInput tokenList={tokenList} />
         <SwapButton />
       </div>
     </form>

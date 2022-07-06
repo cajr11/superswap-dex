@@ -1,12 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import SwapFormChangeTokenButton from "./SwapFormChangeTokenButton";
+import TokenSelectModal from "../UI/TokenSelectModal";
+import { TokenList } from "../../types";
 
 type SwapFormInputProps = {
   initial?: boolean;
+  tokenList: TokenList;
 };
 
-const SwapFormInput = ({ initial }: SwapFormInputProps): JSX.Element => {
+const SwapFormInput = ({ initial, tokenList }: SwapFormInputProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (
@@ -18,6 +21,7 @@ const SwapFormInput = ({ initial }: SwapFormInputProps): JSX.Element => {
           type="number"
         />
         <SwapFormChangeTokenButton initial={initial} />
+        <TokenSelectModal tokenList={tokenList} />
       </div>
     </div>
   );

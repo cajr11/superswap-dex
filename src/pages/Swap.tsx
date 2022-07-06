@@ -1,10 +1,15 @@
 import React from "react";
 import SwapForm from "../components/SwapForm/SwapForm";
+import { TokenList } from "../types";
 
-const Swap = (): JSX.Element => {
+type SwapProps = {
+  tokenList: TokenList;
+};
+
+const Swap = ({ tokenList }: SwapProps): JSX.Element => {
   return (
     <div className={styles.container}>
-      <SwapForm />
+      <SwapForm tokenList={tokenList} />
     </div>
   );
 };

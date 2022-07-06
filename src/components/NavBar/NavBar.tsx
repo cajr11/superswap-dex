@@ -7,6 +7,7 @@ import NavTabSwitcher from "./NavTabSwitcher";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import MoreOptionsDropDown from "./MoreOptionsDropDown";
 import ThemeContext from "../../context/theme-context";
+import { useMoralis } from "react-moralis";
 
 const NavBar = (): JSX.Element => {
   const windowWidth = useWindowWidth();
@@ -15,6 +16,19 @@ const NavBar = (): JSX.Element => {
   const { t } = useTranslation();
   const [showOptions, setShowOptions] = React.useState(false);
   const { isLight } = React.useContext(ThemeContext);
+  const { authenticate, isAuthenticated, logout } = useMoralis();
+
+  const login = async () => {
+    if (!isAuthenticated) {
+      await authenticate({ signingMessage: "Sign in with Superswap" })
+        .then(function (user) {
+          console.log(user!.get("ethAddress"));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
 
   return (
     <nav className="w-screen h-20 bg-transparent p-3 mb-28">
@@ -35,9 +49,13 @@ const NavBar = (): JSX.Element => {
             )}
             <ChevronDownIcon className="h-4 w-4" />
           </div>
-          <button className={isLight ? styles.lightButton : styles.darkButton}>
+          <button
+            className={isLight ? styles.lightButton : styles.darkButton}
+            onClick={login}
+          >
             {t("nav.connect")}
           </button>
+          <button onClick={logout}>logout</button>
           <div className="flex items-center justify-center rounded-2xl py-2 px-3 bg-white">
             <span
               className="h-full w-full flex items-center cursor-pointer"
