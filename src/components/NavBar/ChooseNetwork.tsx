@@ -5,30 +5,36 @@ import bscLogo from "../../assets/images/bsc.png";
 import maticLogo from "../../assets/images/matic.svg";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
 import { Chain } from "../../types";
+import ChainContext from "../../context/chain-context";
 
-type ChooseNetworkProps ={
-    isChoosing(val: boolean): void;
-    activeChain: Chain;
-    chooseChain(val: Chain): void;
-    getChain(val: Chain): void;
-}
+type ChooseNetworkProps = {
+  isChoosing(val: boolean): void;
+  activeChain: Chain;
+  chooseChain(val: Chain): void;
+};
 
-const ChooseNetwork = ({ isChoosing, activeChain, chooseChain, getChain }: ChooseNetworkProps): JSX.Element => {
+const ChooseNetwork = ({
+  isChoosing,
+  activeChain,
+  chooseChain,
+}: ChooseNetworkProps): JSX.Element => {
   const { t } = useTranslation();
-  
+  const chainCtx = React.useContext(ChainContext);
 
   const handleChoice = (val: Chain) => {
     return (event: React.MouseEvent) => {
-        event.preventDefault();
-        chooseChain(val);
-        getChain(val);
-        isChoosing(false);
-        
-    }
-  }
+      event.preventDefault();
+      chooseChain(val);
+      chainCtx.changeChain(val);
+      isChoosing(false);
+    };
+  };
 
   return (
-    <div className="absolute top-16 bg-white rounded-2xl min-w-[250px] min-h-40 p-4" onMouseLeave={() => isChoosing(false)}>
+    <div
+      className="absolute top-16 bg-white rounded-2xl min-w-[250px] min-h-40 p-4"
+      onMouseLeave={() => isChoosing(false)}
+    >
       {/* Header */}
       <div className="w-full h-8 text-base text-gray-500">
         {t("choose-network.select")}
@@ -114,7 +120,7 @@ const ChooseNetwork = ({ isChoosing, activeChain, chooseChain, getChain }: Choos
           className={`w-full flex items-center justify-between ${
             activeChain === "bsc" ? "mb-3" : ""
           }`}
-          onClick={handleChoice('bsc')}
+          onClick={handleChoice("bsc")}
         >
           <div className="flex items-center">
             <img src={bscLogo} alt="bsc" className="h-5 w-5 mr-3" />

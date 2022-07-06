@@ -10,14 +10,21 @@ import {
 import { LanguageType } from "../../types";
 import ThemeContext from "../../context/theme-context";
 
-const MoreOptionsDropDown = (): JSX.Element => {
+type MoreOptionsDropDownProps = {
+  showOptions(val: boolean): void;
+};
+
+const MoreOptionsDropDown = ({ showOptions }: MoreOptionsDropDownProps): JSX.Element => {
   const { t } = useTranslation();
   const [changeLanguage, setChangeLanguage] = React.useState(false);
   const [isSelected, setIsSelected] = React.useState<LanguageType>("English");
   const { isLight, changeTheme } = React.useContext(ThemeContext);
 
   return (
-    <span className="bg-white min-w-[180px] h-20 rounded-lg absolute right-3 top-20 shadow-md p-3 flex flex-col justify-between">
+    <span
+      className="bg-white min-w-[180px] h-20 rounded-lg absolute right-3 top-20 shadow-md p-3 flex flex-col justify-between"
+      onMouseLeave={() => showOptions(false)}
+    >
       {changeLanguage === false && (
         <>
           <button

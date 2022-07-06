@@ -6,6 +6,7 @@ import "./i18n";
 import { MoralisProvider } from "react-moralis";
 import { ThemeContextProvider } from "./context/theme-context";
 import { AuthContextProvider } from "./context/auth-context";
+import { ChainContextProvider } from "./context/chain-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -16,9 +17,11 @@ root.render(
       appId={process.env.REACT_APP_ID_MORALIS!}
     >
       <ThemeContextProvider>
-        <AuthContextProvider>
-          <App />
-        </AuthContextProvider>
+        <ChainContextProvider>
+          <AuthContextProvider>
+            <App />
+          </AuthContextProvider>
+        </ChainContextProvider>
       </ThemeContextProvider>
     </MoralisProvider>
   </React.StrictMode>,
