@@ -2,18 +2,25 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { ChevronDownIcon, DotsHorizontalIcon } from "@heroicons/react/solid";
 import ethLogo from "../../assets/images/eth.png";
+import maticLogo from "../../assets/images/matic.svg";
+import bscLogo from "../../assets/images/bsc.png";
 import NavLogo from "./NavLogo";
 import NavTabSwitcher from "./NavTabSwitcher";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import MoreOptionsDropDown from "./MoreOptionsDropDown";
 import ThemeContext from "../../context/theme-context";
 import { useMoralis } from "react-moralis";
+import ChooseNetwork from "./ChooseNetwork";
+import { Chain } from "../../types";
+
 
 const NavBar = (): JSX.Element => {
   const windowWidth = useWindowWidth();
   const isDesktop = windowWidth >= 920;
   const isBigDesktop = windowWidth >= 1250;
   const { t } = useTranslation();
+  const [chooseNetwork, setChooseNetwork] = React.useState(false);
+  const [activeChain, setActiveChain] = React.useState<Chain>("eth");
   const [showOptions, setShowOptions] = React.useState(false);
   const { isLight } = React.useContext(ThemeContext);
   const { authenticate, isAuthenticated, logout } = useMoralis();
@@ -42,12 +49,19 @@ const NavBar = (): JSX.Element => {
             isDesktop ? "basis-1/4" : "basis-3/4"
           } space-x-2 h-12`}
         >
-          <div className="flex items-center rounded-2xl bg-white p-2 select-none">
-            <img src={ethLogo} alt="token logo" className="h-6 w-6 mr-1" />
+          <div className="flex items-center rounded-2xl bg-white p-2 select-none relative" onMouseEnter={() => setChooseNetwork(true)}>
+           {activeChain === "eth" && <img src={ethLogo} alt="token logo" className="h-6 w-6 mr-1" />}
+           {activeChain === "matic" && <img src={maticLogo} alt="token logo" className="h-6 w-6 mr-1" />}
+           {activeChain === "bsc" && <img src={bscLogo} alt="token logo" className="h-6 w-6 mr-1" />}
             {isBigDesktop && (
-              <span className="flex items-center mr-1 text-sm select-none">Ethereum</span>
+              <span className="flex items-center mr-1 text-sm select-none">
+                {activeChain === "eth" && t("choose-network.networks.eth")}
+                {activeChain === "matic" && t("choose-network.networks.matic")}
+                {activeChain === "bsc" && t("choose-network.networks.bsc")}
+              </span>
             )}
             <ChevronDownIcon className="h-4 w-4" />
+            {chooseNetwork && <ChooseNetwork isChoosing={setChooseNetwork} activeChain={activeChain} chooseChain={setActiveChain} />}
           </div>
           <button
             className={isLight ? styles.lightButton : styles.darkButton}

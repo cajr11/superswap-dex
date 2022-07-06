@@ -3,12 +3,14 @@ import "./App.css";
 import Swap from "./pages/Swap";
 import NavBar from "./components/NavBar/NavBar";
 import ThemeContext from "./context/theme-context";
-import { useOneInchTokens } from "react-moralis";
+import { useOneInchTokens, useChain } from "react-moralis";
 import { TokenList } from "./types";
 
 function App(): JSX.Element {
+  const { chainId, chain, account } = useChain();
+  console.log(chainId, chain, account);
   const { isLight } = React.useContext(ThemeContext);
-  const { getSupportedTokens, data } = useOneInchTokens({ chain: "bsc" });
+  const { getSupportedTokens, data } = useOneInchTokens({ chain: "eth" });
   const [tokenList, setTokenList] = React.useState<TokenList | []>([]);
 
   // Retrieve tokens on initial render and chain switch

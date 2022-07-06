@@ -10,6 +10,7 @@ type SwapFormInputProps = {
 };
 
 const SwapFormInput = ({ initial, tokenList }: SwapFormInputProps): JSX.Element => {
+  const [isSelecting, setIsSelecting] = React.useState(false);
   const { t } = useTranslation();
 
   return (
@@ -20,8 +21,10 @@ const SwapFormInput = ({ initial, tokenList }: SwapFormInputProps): JSX.Element 
           placeholder={t("swap_form.placeholder")}
           type="number"
         />
-        <SwapFormChangeTokenButton initial={initial} />
-        <TokenSelectModal tokenList={tokenList} />
+        <SwapFormChangeTokenButton initial={initial} select={setIsSelecting} />
+        {isSelecting && (
+          <TokenSelectModal tokenList={tokenList} select={setIsSelecting} />
+        )}
       </div>
     </div>
   );

@@ -7,9 +7,10 @@ import { TokenList } from "../../types";
 type TokenSelectModalProps = {
   initial?: boolean;
   tokenList: TokenList;
+  select(val: boolean): void;
 };
 
-const TokenSelectModal = ({ tokenList }: TokenSelectModalProps): JSX.Element => {
+const TokenSelectModal = ({ tokenList, select }: TokenSelectModalProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (
@@ -19,7 +20,7 @@ const TokenSelectModal = ({ tokenList }: TokenSelectModalProps): JSX.Element => 
         {/* Modal Header */}
         <div className="h-10 w-full flex flex-row justify-between items-center px-5">
           <span className="font-semibold text-lg">{t("choose-token.swap")}</span>
-          <XIcon className="h-6 w-6" />
+          <XIcon className="h-6 w-6" onClick={() => select(false)} />
         </div>
 
         {/* Modal Search Bar */}
