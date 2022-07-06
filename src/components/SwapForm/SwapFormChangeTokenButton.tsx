@@ -6,19 +6,22 @@ import ThemeContext from "../../context/theme-context";
 
 type SwapFormChangeTokenButtonProps = {
   initial?: boolean;
+  select(val: boolean): void;
 };
 
 const SwapFormChangeTokenButton = ({
   initial,
+  select
 }: SwapFormChangeTokenButtonProps): JSX.Element => {
   const { t } = useTranslation();
   const { isLight } = React.useContext(ThemeContext);
 
   return (
-    <button
+    <div
       className={`flex whitespace-nowrap ml-1 rounded-3xl p-2 ${
         initial ? "bg-gray-200" : `${isLight ? styles.changeLight : styles.changeDark}`
       }`}
+      onClick={() => select(true)}
     >
       {initial && <img src={ethLogo} alt="token logo" className="h-6 w-6" />}
       <span
@@ -27,7 +30,7 @@ const SwapFormChangeTokenButton = ({
         {initial ? "ETH" : t("swap_form.select")}
         <ChevronDownIcon className={`h-4 w-4 ${initial && "mr-2"}`} />
       </span>
-    </button>
+    </div>
   );
 };
 
