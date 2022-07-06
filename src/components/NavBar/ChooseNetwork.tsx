@@ -26,7 +26,7 @@ const ChooseNetwork = ({ isChoosing, activeChain, chooseChain }: ChooseNetworkPr
   }
 
   return (
-    <div className="absolute top-16 bg-white rounded-2xl min-w-[250px] min-h-40 p-4">
+    <div className="absolute top-16 bg-white rounded-2xl min-w-[250px] min-h-40 p-4" onMouseLeave={() => isChoosing(false)}>
       {/* Header */}
       <div className="w-full h-8 text-base text-gray-500">
         {t("choose-network.select")}
