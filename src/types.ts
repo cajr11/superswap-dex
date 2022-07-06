@@ -1,6 +1,6 @@
 export type LanguageType = "English" | "Spanish";
 
-export type TokenDetailsType = {
+export type TokenDetails = {
   logoURI: string;
   decimals: number;
   name: string;
@@ -9,4 +9,6 @@ export type TokenDetailsType = {
   address: string;
 };
 
-export type TokenList = TokenDetailsType[];
+export type TokenList = TokenDetails[];
+
+export type Chain = "bsc" | "eth" | "matic";
