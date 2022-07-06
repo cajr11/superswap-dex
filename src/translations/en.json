@@ -23,5 +23,18 @@
   "choose-token": {
     "swap": "Select a token",
     "search": "Search name or paste address"
+  },
+  "choose-network": {
+    "select": "Select a network",
+    "networks": {
+      "bsc": "Binance",
+      "eth": "Ethereum",
+      "matic": "Polygon"
+    },
+    "scans": {
+      "bsc": "Bscscan",
+      "eth": "Etherscan",
+      "matic": "Polygonscan"
+    }
   }
 }
