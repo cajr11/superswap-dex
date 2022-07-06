@@ -6,9 +6,24 @@ import maticLogo from "../../assets/images/matic.svg";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
 import { Chain } from "../../types";
 
-const ChooseNetwork = (): JSX.Element => {
+type ChooseNetworkProps ={
+    isChoosing(val: boolean): void;
+    activeChain: Chain;
+    chooseChain(val: Chain): void;
+}
+
+const ChooseNetwork = ({ isChoosing, activeChain, chooseChain }: ChooseNetworkProps): JSX.Element => {
   const { t } = useTranslation();
-  const [activeChain, setActiveChain] = React.useState<Chain>("eth");
+  
+
+  const handleChoice = (val: Chain) => {
+    return (event: React.MouseEvent) => {
+        event.preventDefault();
+        chooseChain(val)
+        isChoosing(false);
+        
+    }
+  }
 
   return (
     <div className="absolute top-16 bg-white rounded-2xl min-w-[250px] min-h-40 p-4">
@@ -27,7 +42,7 @@ const ChooseNetwork = (): JSX.Element => {
           className={`w-full flex items-center justify-between ${
             activeChain === "eth" ? "mb-3" : ""
           }`}
-          onClick={() => setActiveChain("eth")}
+          onClick={handleChoice("eth")}
         >
           <div className="flex items-center">
             <img src={ethLogo} alt="eth" className="h-5 w-5 mr-3" />
@@ -62,7 +77,7 @@ const ChooseNetwork = (): JSX.Element => {
           className={`w-full flex items-center justify-between ${
             activeChain === "matic" ? "mb-3" : ""
           }`}
-          onClick={() => setActiveChain("matic")}
+          onClick={handleChoice("matic")}
         >
           <div className="flex items-center">
             <img src={maticLogo} alt="matic" className="h-5 w-5 mr-3" />
@@ -97,7 +112,7 @@ const ChooseNetwork = (): JSX.Element => {
           className={`w-full flex items-center justify-between ${
             activeChain === "bsc" ? "mb-3" : ""
           }`}
-          onClick={() => setActiveChain("bsc")}
+          onClick={handleChoice('bsc')}
         >
           <div className="flex items-center">
             <img src={bscLogo} alt="bsc" className="h-5 w-5 mr-3" />
