@@ -13,8 +13,11 @@ import { useMoralis } from "react-moralis";
 import ChooseNetwork from "./ChooseNetwork";
 import { Chain } from "../../types";
 
+type NavBarProps = {
+  getChain(val: Chain): void;
+}
 
-const NavBar = (): JSX.Element => {
+const NavBar = ({ getChain }: NavBarProps): JSX.Element => {
   const windowWidth = useWindowWidth();
   const isDesktop = windowWidth >= 920;
   const isBigDesktop = windowWidth >= 1250;
@@ -51,17 +54,17 @@ const NavBar = (): JSX.Element => {
         >
           <div className="flex items-center rounded-2xl bg-white p-2 select-none relative" onMouseEnter={() => setChooseNetwork(true)}>
            {activeChain === "eth" && <img src={ethLogo} alt="token logo" className="h-6 w-6 mr-1" />}
-           {activeChain === "matic" && <img src={maticLogo} alt="token logo" className="h-6 w-6 mr-1" />}
+           {activeChain === "polygon" && <img src={maticLogo} alt="token logo" className="h-6 w-6 mr-1" />}
            {activeChain === "bsc" && <img src={bscLogo} alt="token logo" className="h-6 w-6 mr-1" />}
             {isBigDesktop && (
               <span className="flex items-center mr-1 text-sm select-none">
                 {activeChain === "eth" && t("choose-network.networks.eth")}
-                {activeChain === "matic" && t("choose-network.networks.matic")}
+                {activeChain === "polygon" && t("choose-network.networks.matic")}
                 {activeChain === "bsc" && t("choose-network.networks.bsc")}
               </span>
             )}
             <ChevronDownIcon className="h-4 w-4" />
-            {chooseNetwork && <ChooseNetwork isChoosing={setChooseNetwork} activeChain={activeChain} chooseChain={setActiveChain} />}
+            {chooseNetwork && <ChooseNetwork isChoosing={setChooseNetwork} activeChain={activeChain} chooseChain={setActiveChain} getChain={getChain} />}
           </div>
           <button
             className={isLight ? styles.lightButton : styles.darkButton}

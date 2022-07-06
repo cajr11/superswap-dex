@@ -10,16 +10,18 @@ type ChooseNetworkProps ={
     isChoosing(val: boolean): void;
     activeChain: Chain;
     chooseChain(val: Chain): void;
+    getChain(val: Chain): void;
 }
 
-const ChooseNetwork = ({ isChoosing, activeChain, chooseChain }: ChooseNetworkProps): JSX.Element => {
+const ChooseNetwork = ({ isChoosing, activeChain, chooseChain, getChain }: ChooseNetworkProps): JSX.Element => {
   const { t } = useTranslation();
   
 
   const handleChoice = (val: Chain) => {
     return (event: React.MouseEvent) => {
         event.preventDefault();
-        chooseChain(val)
+        chooseChain(val);
+        getChain(val);
         isChoosing(false);
         
     }
@@ -70,24 +72,24 @@ const ChooseNetwork = ({ isChoosing, activeChain, chooseChain }: ChooseNetworkPr
       {/* Polygon */}
       <div
         className={`w-full cursor-pointer rounded-lg ${
-          activeChain === "matic" ? "mb-3 p-4 bg-gray-100" : "mb-4 p-2"
+          activeChain === "polygon" ? "mb-3 p-4 bg-gray-100" : "mb-4 p-2"
         }`}
       >
         <div
           className={`w-full flex items-center justify-between ${
-            activeChain === "matic" ? "mb-3" : ""
+            activeChain === "polygon" ? "mb-3" : ""
           }`}
-          onClick={handleChoice("matic")}
+          onClick={handleChoice("polygon")}
         >
           <div className="flex items-center">
             <img src={maticLogo} alt="matic" className="h-5 w-5 mr-3" />
             <span>{t("choose-network.networks.matic")}</span>
           </div>
-          {activeChain === "matic" && (
+          {activeChain === "polygon" && (
             <span className="w-2 h-2 bg-green-800 rounded-full"></span>
           )}
         </div>
-        {activeChain === "matic" && (
+        {activeChain === "polygon" && (
           <a
             href="https://polygonscan.com/"
             target="_blank"

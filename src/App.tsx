@@ -4,13 +4,13 @@ import Swap from "./pages/Swap";
 import NavBar from "./components/NavBar/NavBar";
 import ThemeContext from "./context/theme-context";
 import { useOneInchTokens, useChain } from "react-moralis";
-import { TokenList } from "./types";
+import { TokenList, Chain } from "./types";
 
 function App(): JSX.Element {
-  const { chainId, chain, account } = useChain();
-  console.log(chainId, chain, account);
+  // const { chainId, chain, account } = useChain();
+  const [chosenChain, setChosenChain] = React.useState<Chain>("eth");
   const { isLight } = React.useContext(ThemeContext);
-  const { getSupportedTokens, data } = useOneInchTokens({ chain: "eth" });
+  const { getSupportedTokens, data } = useOneInchTokens({ chain: chosenChain });
   const [tokenList, setTokenList] = React.useState<TokenList | []>([]);
 
   // Retrieve tokens on initial render and chain switch
@@ -20,16 +20,15 @@ function App(): JSX.Element {
     };
     if (data.length === 0) {
       getTokens();
-      console.log(data);
     } else {
-      const formattedData = JSON.parse(JSON.stringify(data, null, 2));
+      const formattedData = JSON.parse(JSON.stringify(data!, null, 2));
       setTokenList(Object.values(formattedData.tokens));
     }
   }, [data, getSupportedTokens]);
 
   return (
     <div className={isLight ? styles.containerLight : styles.containerDark}>
-      <NavBar />
+      <NavBar getChain={setChosenChain}/>
       <Swap tokenList={tokenList} />
     </div>
   );
