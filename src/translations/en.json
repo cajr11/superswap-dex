@@ -19,5 +19,9 @@
       "english": "English",
       "spanish": "Español"
     }
+  },
+  "choose-token": {
+    "swap": "Select a token",
+    "search": "Search name or paste address"
   }
 }
