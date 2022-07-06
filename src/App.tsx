@@ -7,8 +7,8 @@ import { useOneInchTokens, useChain } from "react-moralis";
 import { TokenList } from "./types";
 
 function App(): JSX.Element {
-  const { switchNetwork, chainId, chain, account } = useChain();
-  console.log(chainId, chain, account)
+  const { chainId, chain, account } = useChain();
+  console.log(chainId, chain, account);
   const { isLight } = React.useContext(ThemeContext);
   const { getSupportedTokens, data } = useOneInchTokens({ chain: "eth" });
   const [tokenList, setTokenList] = React.useState<TokenList | []>([]);

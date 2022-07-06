@@ -11,7 +11,7 @@ type SwapFormChangeTokenButtonProps = {
 
 const SwapFormChangeTokenButton = ({
   initial,
-  select
+  select,
 }: SwapFormChangeTokenButtonProps): JSX.Element => {
   const { t } = useTranslation();
   const { isLight } = React.useContext(ThemeContext);

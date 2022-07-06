@@ -20,7 +20,7 @@ const TokenSelectModal = ({ tokenList, select }: TokenSelectModalProps): JSX.Ele
         {/* Modal Header */}
         <div className="h-10 w-full flex flex-row justify-between items-center px-5">
           <span className="font-semibold text-lg">{t("choose-token.swap")}</span>
-          <XIcon className="h-6 w-6" onClick={() => select(false)}/>
+          <XIcon className="h-6 w-6" onClick={() => select(false)} />
         </div>
 
         {/* Modal Search Bar */}

@@ -8,6 +8,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import MoreOptionsDropDown from "./MoreOptionsDropDown";
 import ThemeContext from "../../context/theme-context";
 import { useMoralis } from "react-moralis";
+import ChooseNetwork from "./ChooseNetwork";
 
 const NavBar = (): JSX.Element => {
   const windowWidth = useWindowWidth();
@@ -42,12 +43,13 @@ const NavBar = (): JSX.Element => {
             isDesktop ? "basis-1/4" : "basis-3/4"
           } space-x-2 h-12`}
         >
-          <div className="flex items-center rounded-2xl bg-white p-2 select-none">
+          <div className="flex items-center rounded-2xl bg-white p-2 select-none relative">
             <img src={ethLogo} alt="token logo" className="h-6 w-6 mr-1" />
             {isBigDesktop && (
               <span className="flex items-center mr-1 text-sm select-none">Ethereum</span>
             )}
             <ChevronDownIcon className="h-4 w-4" />
+            <ChooseNetwork />
           </div>
           <button
             className={isLight ? styles.lightButton : styles.darkButton}

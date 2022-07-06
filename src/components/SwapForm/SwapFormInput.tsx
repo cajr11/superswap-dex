@@ -10,7 +10,7 @@ type SwapFormInputProps = {
 };
 
 const SwapFormInput = ({ initial, tokenList }: SwapFormInputProps): JSX.Element => {
-  const [isSelecting, setIsSelecting] = React.useState(false)
+  const [isSelecting, setIsSelecting] = React.useState(false);
   const { t } = useTranslation();
 
   return (
@@ -22,7 +22,9 @@ const SwapFormInput = ({ initial, tokenList }: SwapFormInputProps): JSX.Element 
           type="number"
         />
         <SwapFormChangeTokenButton initial={initial} select={setIsSelecting} />
-        {isSelecting && <TokenSelectModal tokenList={tokenList} select={setIsSelecting} />}
+        {isSelecting && (
+          <TokenSelectModal tokenList={tokenList} select={setIsSelecting} />
+        )}
       </div>
     </div>
   );
