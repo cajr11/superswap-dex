@@ -11,4 +11,4 @@ export type TokenDetails = {
 
 export type TokenList = TokenDetails[];
 
-export type Chain = "bsc" | "eth" | "matic";
+export type Chain = "bsc" | "eth" | "polygon";
