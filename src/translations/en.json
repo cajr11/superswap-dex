@@ -36,5 +36,17 @@
       "eth": "Etherscan",
       "matic": "Polygonscan"
     }
+  },
+  "login": {
+    "account": "Account",
+    "authenticate": "Authenticating...",
+    "connect": "Connect a wallet",
+    "connected": "Connected with {{ wallet }}",
+    "disconnect": "Disconnect",
+    "metamask": "Metamask",
+    "wc": "WalletConnect",
+    "copy": "Copy Address",
+    "copied": "Copied",
+    "view": "View on Explorer"
   }
 }
