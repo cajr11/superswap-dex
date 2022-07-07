@@ -3,7 +3,7 @@ import SwapFormHeader from "./SwapFormHeader";
 import SwapFormInput from "./SwapFormInput";
 import SwapButton from "./SwapButton";
 import ThemeContext from "../../context/theme-context";
-import { TokenList } from "../../types";
+import type { TokenList } from "../../types";
 
 type SwapFormProps = {
   tokenList: TokenList;

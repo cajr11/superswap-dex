@@ -4,7 +4,7 @@ type ThemeContextProviderProps = {
   children: React.ReactNode;
 };
 
-export const ThemeContext = React.createContext({
+const ThemeContext = React.createContext({
   isLight: true,
   changeTheme: () => {},
 });

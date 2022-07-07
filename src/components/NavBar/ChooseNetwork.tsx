@@ -5,28 +5,36 @@ import bscLogo from "../../assets/images/bsc.png";
 import maticLogo from "../../assets/images/matic.svg";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
 import { Chain } from "../../types";
+import ChainContext from "../../context/chain-context";
 
-type ChooseNetworkProps ={
-    isChoosing(val: boolean): void;
-    activeChain: Chain;
-    chooseChain(val: Chain): void;
-}
+type ChooseNetworkProps = {
+  isChoosing(val: boolean): void;
+  activeChain: Chain;
+  chooseChain(val: Chain): void;
+};
 
-const ChooseNetwork = ({ isChoosing, activeChain, chooseChain }: ChooseNetworkProps): JSX.Element => {
+const ChooseNetwork = ({
+  isChoosing,
+  activeChain,
+  chooseChain,
+}: ChooseNetworkProps): JSX.Element => {
   const { t } = useTranslation();
-  
+  const chainCtx = React.useContext(ChainContext);
 
   const handleChoice = (val: Chain) => {
     return (event: React.MouseEvent) => {
-        event.preventDefault();
-        chooseChain(val)
-        isChoosing(false);
-        
-    }
-  }
+      event.preventDefault();
+      chooseChain(val);
+      chainCtx.changeChain(val);
+      isChoosing(false);
+    };
+  };
 
   return (
-    <div className="absolute top-16 bg-white rounded-2xl min-w-[250px] min-h-40 p-4">
+    <div
+      className="absolute top-16 bg-white rounded-2xl min-w-[250px] min-h-40 p-4"
+      onMouseLeave={() => isChoosing(false)}
+    >
       {/* Header */}
       <div className="w-full h-8 text-base text-gray-500">
         {t("choose-network.select")}
@@ -70,24 +78,24 @@ const ChooseNetwork = ({ isChoosing, activeChain, chooseChain }: ChooseNetworkPr
       {/* Polygon */}
       <div
         className={`w-full cursor-pointer rounded-lg ${
-          activeChain === "matic" ? "mb-3 p-4 bg-gray-100" : "mb-4 p-2"
+          activeChain === "polygon" ? "mb-3 p-4 bg-gray-100" : "mb-4 p-2"
         }`}
       >
         <div
           className={`w-full flex items-center justify-between ${
-            activeChain === "matic" ? "mb-3" : ""
+            activeChain === "polygon" ? "mb-3" : ""
           }`}
-          onClick={handleChoice("matic")}
+          onClick={handleChoice("polygon")}
         >
           <div className="flex items-center">
             <img src={maticLogo} alt="matic" className="h-5 w-5 mr-3" />
             <span>{t("choose-network.networks.matic")}</span>
           </div>
-          {activeChain === "matic" && (
+          {activeChain === "polygon" && (
             <span className="w-2 h-2 bg-green-800 rounded-full"></span>
           )}
         </div>
-        {activeChain === "matic" && (
+        {activeChain === "polygon" && (
           <a
             href="https://polygonscan.com/"
             target="_blank"
@@ -112,7 +120,7 @@ const ChooseNetwork = ({ isChoosing, activeChain, chooseChain }: ChooseNetworkPr
           className={`w-full flex items-center justify-between ${
             activeChain === "bsc" ? "mb-3" : ""
           }`}
-          onClick={handleChoice('bsc')}
+          onClick={handleChoice("bsc")}
         >
           <div className="flex items-center">
             <img src={bscLogo} alt="bsc" className="h-5 w-5 mr-3" />
