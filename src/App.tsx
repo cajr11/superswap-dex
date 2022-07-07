@@ -4,16 +4,40 @@ import Swap from "./pages/Swap";
 import NavBar from "./components/NavBar/NavBar";
 import ThemeContext from "./context/theme-context";
 import { useOneInchTokens } from "react-moralis";
+import { useMoralis, useChain } from "react-moralis";
 import { TokenList } from "./types";
 import ChainContext from "./context/chain-context";
 
 function App(): JSX.Element {
   // const { chainId, chain, account } = useChain();
   const chainCtx = useContext(ChainContext);
-
   const { isLight } = React.useContext(ThemeContext);
+  const { isAuthenticated, isWeb3Enabled, enableWeb3, isWeb3EnableLoading } =
+    useMoralis();
+  const { switchNetwork } = useChain();
   const { getSupportedTokens, data } = useOneInchTokens({ chain: chainCtx.chain });
   const [tokenList, setTokenList] = React.useState<TokenList | []>([]);
+
+  React.useEffect(() => {
+    const updateNetwork = async () => {
+      if (!isWeb3Enabled) enableWeb3();
+      if (!isWeb3EnableLoading) {
+        if (isAuthenticated) {
+          if (chainCtx.chain === "eth") await switchNetwork("0x1");
+          if (chainCtx.chain === "bsc") await switchNetwork("0x38");
+          if (chainCtx.chain === "polygon") await switchNetwork("0x89");
+        }
+      }
+    };
+    updateNetwork();
+  }, [
+    chainCtx.chain,
+    isAuthenticated,
+    switchNetwork,
+    enableWeb3,
+    isWeb3EnableLoading,
+    isWeb3Enabled,
+  ]);
 
   // Retrieve tokens on initial render and chain switch
   React.useEffect(() => {

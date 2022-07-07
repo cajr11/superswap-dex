@@ -23,7 +23,7 @@ const SwapFormChangeTokenButton = ({
   return (
     <div
       className={`flex whitespace-nowrap ml-1 rounded-3xl p-2 cursor-pointer ${
-        initial ? "bg-gray-200" : `${isLight ? styles.changeLight : styles.changeDark}`
+        initial ? `${isLight ? styles.changeLight : styles.changeDark}` : `${isLight ? styles.changeLight : styles.changeDark}`
       }`}
       onClick={() => select(true)}
     >
@@ -50,8 +50,8 @@ const SwapFormChangeTokenButton = ({
 };
 
 const styles = {
-  changeLight: "bg-orange-400 text-white",
-  changeDark: "bg-blue-400 text-white",
+  changeLight: "bg-orange-400 text-gray-200 ",
+  changeDark: "bg-blue-400 text-gray-200",
 };
 
 export default SwapFormChangeTokenButton;
