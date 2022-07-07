@@ -3,7 +3,7 @@ import "./App.css";
 import Swap from "./pages/Swap";
 import NavBar from "./components/NavBar/NavBar";
 import ThemeContext from "./context/theme-context";
-import { useOneInchTokens, useChain } from "react-moralis";
+import { useOneInchTokens } from "react-moralis";
 import { TokenList } from "./types";
 import ChainContext from "./context/chain-context";
 
@@ -40,7 +40,7 @@ export default App;
 
 const styles = {
   containerLight:
-    "w-screen h-screen bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 overflow-hidden",
+    "w-screen h-screen bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 overflow-hidden relative",
   containerDark:
     "w-screen h-screen bg-gradient-to-r from-indigo-800 via-blue-900 to-zinc-800",
 };
