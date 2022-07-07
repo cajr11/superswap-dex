@@ -14,7 +14,13 @@ import { useMoralis, useNativeBalance } from "react-moralis";
 import type { Chain } from "../../types";
 import LoginMethodModal from "../UI/LoginMethodModal";
 
-const NavBar = (): JSX.Element => {
+
+type NavBarProps = {
+  loginModalOpen: boolean;
+  setLoginModalOpen(val: boolean): void;
+}
+
+const NavBar = ({ loginModalOpen, setLoginModalOpen}: NavBarProps): JSX.Element => {
   const { t } = useTranslation();
   const windowWidth = useWindowWidth();
   const isDesktop = windowWidth >= 920;
@@ -27,7 +33,6 @@ const NavBar = (): JSX.Element => {
   const [chooseNetwork, setChooseNetwork] = React.useState(false);
   const [activeChain, setActiveChain] = React.useState<Chain>("eth");
   const [showOptions, setShowOptions] = React.useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (isAuthenticated) {
@@ -38,7 +43,7 @@ const NavBar = (): JSX.Element => {
 
   return (
     <>
-      {isLoginModalOpen && <LoginMethodModal close={setIsLoginModalOpen} />}
+      {loginModalOpen && <LoginMethodModal close={setLoginModalOpen} />}
       <nav className="w-screen h-20 bg-transparent p-3 mb-28">
         <div
           className={`w-full h-full flex items-center ${!isDesktop && "justify-between"}`}
@@ -83,7 +88,7 @@ const NavBar = (): JSX.Element => {
             {!isAuthenticated && (
               <div
                 className={isLight ? styles.lightButton : styles.darkButton}
-                onClick={() => setIsLoginModalOpen(true)}
+                onClick={() => setLoginModalOpen(true)}
               >
                 {t("nav.connect")}
               </div>
@@ -93,7 +98,7 @@ const NavBar = (): JSX.Element => {
             {isAuthenticated && (
               <div
                 className={isLight ? styles.connectLight : styles.connectDark}
-                onClick={() => setIsLoginModalOpen(true)}
+                onClick={() => setLoginModalOpen(true)}
               >
                 <span className="p-1 text-xs">{accBalance}</span>
                 <span className={isLight ? styles.addressLight : styles.addressDark}>

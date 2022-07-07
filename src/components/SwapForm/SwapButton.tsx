@@ -2,15 +2,19 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ThemeContext from "../../context/theme-context";
 
-const SwapButton = (): JSX.Element => {
+type SwapButtonProps = {
+  setLoginModalOpen(val: boolean): void;
+}
+
+const SwapButton = ({ setLoginModalOpen}: SwapButtonProps): JSX.Element => {
   const { t } = useTranslation();
   const { isLight } = React.useContext(ThemeContext);
 
   return (
-    <div className={isLight ? styles.lightContainer : styles.darkContainer}>
-      <button className={isLight ? styles.lightButton : styles.darkButton}>
+    <div className={isLight ? styles.lightContainer : styles.darkContainer} onClick={() => setLoginModalOpen(true)}>
+      <div className={isLight ? styles.lightButton : styles.darkButton}>
         {t("swap_form.connect")}
-      </button>
+      </div>
     </div>
   );
 };

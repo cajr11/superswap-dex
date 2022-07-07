@@ -17,6 +17,7 @@ function App(): JSX.Element {
   const { switchNetwork } = useChain();
   const { getSupportedTokens, data } = useOneInchTokens({ chain: chainCtx.chain });
   const [tokenList, setTokenList] = React.useState<TokenList | []>([]);
+  const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
 
   React.useEffect(() => {
     const updateNetwork = async () => {
@@ -54,8 +55,8 @@ function App(): JSX.Element {
 
   return (
     <div className={isLight ? styles.containerLight : styles.containerDark}>
-      <NavBar />
-      <Swap tokenList={tokenList} />
+      <NavBar  loginModalOpen={isLoginModalOpen} setLoginModalOpen={setIsLoginModalOpen}/>
+      <Swap tokenList={tokenList} setLoginModalOpen={setIsLoginModalOpen} />
     </div>
   );
 }

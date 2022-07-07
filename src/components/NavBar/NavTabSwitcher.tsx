@@ -22,7 +22,7 @@ const NavTabSwitcher = (): JSX.Element => {
         </a>
         <a
           href="/"
-          className=" flex items-center justify-center rounded-3xl text-gray-500 w-full"
+          className={`${isLight ? styles.transactionLsLight : styles.transctionDark}`}
         >
           {t("nav.transactions")}
         </a>
@@ -33,9 +33,11 @@ const NavTabSwitcher = (): JSX.Element => {
 
 const styles = {
   light: "w-52 h-full flex justify-evenly rounded-3xl bg-gray-200 select-none",
-  dark: "w-52 h-full flex justify-evenly rounded-3xl bg-gray-800 select-none",
+  dark: "w-52 h-full flex justify-evenly rounded-3xl bg-blue-400 select-none",
   swapDark: "flex items-center justify-center bg-blue-600 rounded-3xl text-gray-50 w-1/2",
-  swapLight: "flex items-center justify-center bg-white rounded-3xl text-black w-1/2",
+  swapLight: "flex items-center justify-center bg-white rounded-3xl w-1/2",
+  transactionLsLight: "flex items-center justify-center rounded-3xl w-full",
+  transctionDark: "flex items-center justify-center rounded-3xl text-white w-full"
 }
 
 export default NavTabSwitcher;
