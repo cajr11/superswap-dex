@@ -45,6 +45,7 @@ function App(): JSX.Element {
     const getTokens = async () => {
       await getSupportedTokens();
     };
+
     if (data.length === 0) {
       getTokens();
     } else {
@@ -55,7 +56,7 @@ function App(): JSX.Element {
 
   return (
     <div className={isLight ? styles.containerLight : styles.containerDark}>
-      <NavBar  loginModalOpen={isLoginModalOpen} setLoginModalOpen={setIsLoginModalOpen}/>
+      <NavBar loginModalOpen={isLoginModalOpen} setLoginModalOpen={setIsLoginModalOpen} />
       <Swap tokenList={tokenList} setLoginModalOpen={setIsLoginModalOpen} />
     </div>
   );

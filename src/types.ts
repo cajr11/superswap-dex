@@ -12,3 +12,9 @@ export type TokenDetails = {
 export type TokenList = TokenDetails[];
 
 export type Chain = "bsc" | "eth" | "polygon";
+
+export type SelectedToken = {
+  name?: string;
+  logo?: string;
+  symbol?: string;
+};

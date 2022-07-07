@@ -4,16 +4,24 @@ import { XIcon } from "@heroicons/react/solid";
 import TokenListItem from "./TokenListItem";
 import { TokenList } from "../../types";
 import ThemeContext from "../../context/theme-context";
+import type { SelectedToken } from "../../types";
 
 type TokenSelectModalProps = {
   initial?: boolean;
   tokenList: TokenList;
   select(val: boolean): void;
+  choose(val: SelectedToken): void;
+  isSelecting(val: boolean): void;
 };
 
-const TokenSelectModal = ({ tokenList, select }: TokenSelectModalProps): JSX.Element => {
+const TokenSelectModal = ({
+  tokenList,
+  select,
+  choose,
+  isSelecting,
+}: TokenSelectModalProps): JSX.Element => {
   const { t } = useTranslation();
-  const themeCtx = React.useContext(ThemeContext)
+  const themeCtx = React.useContext(ThemeContext);
 
   return (
     <>
@@ -37,7 +45,14 @@ const TokenSelectModal = ({ tokenList, select }: TokenSelectModalProps): JSX.Ele
         <div className="flex-1 p-4 overflow-hidden">
           <ul className="w-full h-full overflow-y-scroll">
             {tokenList.map(({ logoURI, name, symbol, address }) => (
-              <TokenListItem key={address} logo={logoURI} name={name} symbol={symbol} />
+              <TokenListItem
+                key={address}
+                logo={logoURI}
+                name={name}
+                symbol={symbol}
+                choose={choose}
+                isSelecting={isSelecting}
+              />
             ))}
           </ul>
         </div>
@@ -50,5 +65,6 @@ export default TokenSelectModal;
 
 const styles = {
   dark: "absolute w-screen h-[70%] bottom-0 left-0 bg-blue-800 rounded-t-2xl z-40 py-5 flex flex-col md:w-[450px] md:h-[450px] md:m-auto md:top-0 md:right-0 md:rounded-xl md:py-2 md:pb-0",
-  light: "absolute w-screen h-[70%] bottom-0 left-0 bg-white rounded-t-2xl z-40 py-5 flex flex-col md:w-[450px] md:h-[450px] md:m-auto md:top-0 md:right-0 md:rounded-xl md:py-2 md:pb-0"
-}
+  light:
+    "absolute w-screen h-[70%] bottom-0 left-0 bg-white rounded-t-2xl z-40 py-5 flex flex-col md:w-[450px] md:h-[450px] md:m-auto md:top-0 md:right-0 md:rounded-xl md:py-2 md:pb-0",
+};

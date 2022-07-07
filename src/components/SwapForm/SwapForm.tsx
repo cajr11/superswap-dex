@@ -5,22 +5,34 @@ import SwapButton from "./SwapButton";
 import ThemeContext from "../../context/theme-context";
 import type { TokenList } from "../../types";
 import { useMoralis } from "react-moralis";
+import type { SelectedToken } from "../../types";
 
 type SwapFormProps = {
   tokenList: TokenList;
-  setLoginModalOpen(val: boolean): void
+  setLoginModalOpen(val: boolean): void;
 };
 
 const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element => {
   const { isLight } = React.useContext(ThemeContext);
-  const {isAuthenticated} = useMoralis()
+  const { isAuthenticated } = useMoralis();
+  const [firstToken, setFirstToken] = React.useState<SelectedToken>({});
+  const [secondToken, setSecondToken] = React.useState<SelectedToken>({});
 
   return (
     <form className={isLight ? styles.light : styles.dark}>
       <div className="w-full rounded-3xl p-2 select-none">
         <SwapFormHeader />
-        <SwapFormInput initial={true} tokenList={tokenList} />
-        <SwapFormInput  tokenList={tokenList}/>
+        <SwapFormInput
+          initial={true}
+          tokenList={tokenList}
+          choose={setFirstToken}
+          selected={firstToken}
+        />
+        <SwapFormInput
+          tokenList={tokenList}
+          choose={setSecondToken}
+          selected={secondToken}
+        />
         {!isAuthenticated && <SwapButton setLoginModalOpen={setLoginModalOpen} />}
       </div>
     </form>
