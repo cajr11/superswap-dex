@@ -7,6 +7,8 @@ type TokenListItemProps = {
   symbol: string;
   choose(val: SelectedToken): void;
   isSelecting(val: boolean): void;
+  address: string;
+  decimals: number;
 };
 
 const TokenListItem = ({
@@ -15,11 +17,15 @@ const TokenListItem = ({
   symbol,
   choose,
   isSelecting,
+  address,
+  decimals,
 }: TokenListItemProps): JSX.Element => {
   const choice = {
     logo,
     symbol,
     name,
+    address,
+    decimals,
   };
 
   const handleClick = () => {

@@ -2,9 +2,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { XIcon } from "@heroicons/react/solid";
 import TokenListItem from "./TokenListItem";
-import { TokenList } from "../../types";
+import { TokenDetails, TokenList } from "../../types";
 import ThemeContext from "../../context/theme-context";
 import type { SelectedToken } from "../../types";
+import { DebounceInput } from "react-debounce-input";
 
 type TokenSelectModalProps = {
   initial?: boolean;
@@ -22,6 +23,29 @@ const TokenSelectModal = ({
 }: TokenSelectModalProps): JSX.Element => {
   const { t } = useTranslation();
   const themeCtx = React.useContext(ThemeContext);
+  const [searchedValue, setSearchedValue] = React.useState("");
+  const [customTokenList, setCustomTokenList] = React.useState<TokenDetails[]>(tokenList);
+
+  React.useEffect(() => {
+    console.log(searchedValue.slice(0, 2));
+    if (searchedValue.slice(0, 2).includes("0x")) {
+      const filteredList = tokenList.filter((token) =>
+        token.address.includes(searchedValue),
+      );
+      setCustomTokenList(filteredList);
+    }
+
+    if (!searchedValue.slice(0, 2).includes("0x")) {
+      const filteredList = tokenList.filter((token) =>
+        token.symbol.includes(searchedValue.toUpperCase()),
+      );
+      setCustomTokenList(filteredList);
+    }
+
+    if (searchedValue.length === 0) {
+      setCustomTokenList(tokenList);
+    }
+  }, [searchedValue, setCustomTokenList, tokenList]);
 
   return (
     <>
@@ -35,26 +59,34 @@ const TokenSelectModal = ({
 
         {/* Modal Search Bar */}
         <div className="h-24 p-3 pb-5 border-b border-b-gray-200">
-          <input
+          <DebounceInput
+            debounceTimeout={300}
             className="border border-gray-200 w-full h-full rounded-2xl px-3"
             placeholder={t("choose-token.search")}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSearchedValue(e.target.value)
+            }
           />
         </div>
 
         {/* Modal List  */}
         <div className="flex-1 p-4 overflow-hidden">
-          <ul className="w-full h-full overflow-y-scroll">
-            {tokenList.map(({ logoURI, name, symbol, address }) => (
-              <TokenListItem
-                key={address}
-                logo={logoURI}
-                name={name}
-                symbol={symbol}
-                choose={choose}
-                isSelecting={isSelecting}
-              />
-            ))}
-          </ul>
+          {customTokenList && (
+            <ul className="w-full h-full overflow-y-scroll">
+              {customTokenList.map(({ logoURI, name, symbol, address, decimals }) => (
+                <TokenListItem
+                  key={address}
+                  logo={logoURI}
+                  name={name}
+                  symbol={symbol}
+                  choose={choose}
+                  isSelecting={isSelecting}
+                  address={address}
+                  decimals={decimals}
+                />
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </>

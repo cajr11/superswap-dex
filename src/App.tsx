@@ -18,6 +18,7 @@ function App(): JSX.Element {
   const { getSupportedTokens, data } = useOneInchTokens({ chain: chainCtx.chain });
   const [tokenList, setTokenList] = React.useState<TokenList | []>([]);
   const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
+  console.log(tokenList);
 
   React.useEffect(() => {
     const updateNetwork = async () => {

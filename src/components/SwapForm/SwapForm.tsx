@@ -6,6 +6,8 @@ import ThemeContext from "../../context/theme-context";
 import type { TokenList } from "../../types";
 import { useMoralis } from "react-moralis";
 import type { SelectedToken } from "../../types";
+import ChainContext from "../../context/chain-context";
+import Moralis from "moralis";
 
 type SwapFormProps = {
   tokenList: TokenList;
@@ -14,9 +16,29 @@ type SwapFormProps = {
 
 const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element => {
   const { isLight } = React.useContext(ThemeContext);
+  const { chain } = React.useContext(ChainContext);
   const { isAuthenticated } = useMoralis();
   const [firstToken, setFirstToken] = React.useState<SelectedToken>({});
   const [secondToken, setSecondToken] = React.useState<SelectedToken>({});
+  const [firstAmount, setFirstAmount] = React.useState(0);
+  const [secondAmount, setSecondAmount] = React.useState(0);
+
+  const amount = Number(Moralis.Units);
+
+  React.useEffect(() => {
+    const getQuote = async () => {
+      if (firstToken.address && secondToken.address) {
+        const quote = await Moralis.Plugins.oneInch.quote({
+          chain, // The blockchain you want to use (eth/bsc/polygon)
+          fromTokenAddress: firstToken.address, // The token you want to swap
+          toTokenAddress: secondToken.address, // The token you want to receive
+          amount: "1",
+        });
+        console.log(quote);
+      }
+    };
+    getQuote();
+  });
 
   return (
     <form className={isLight ? styles.light : styles.dark}>
