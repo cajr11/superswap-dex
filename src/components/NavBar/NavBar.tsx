@@ -14,7 +14,12 @@ import { useMoralis, useNativeBalance } from "react-moralis";
 import type { Chain } from "../../types";
 import LoginMethodModal from "../UI/LoginMethodModal";
 
-const NavBar = (): JSX.Element => {
+type NavBarProps = {
+  loginModalOpen: boolean;
+  setLoginModalOpen(val: boolean): void;
+};
+
+const NavBar = ({ loginModalOpen, setLoginModalOpen }: NavBarProps): JSX.Element => {
   const { t } = useTranslation();
   const windowWidth = useWindowWidth();
   const isDesktop = windowWidth >= 920;
@@ -27,7 +32,6 @@ const NavBar = (): JSX.Element => {
   const [chooseNetwork, setChooseNetwork] = React.useState(false);
   const [activeChain, setActiveChain] = React.useState<Chain>("eth");
   const [showOptions, setShowOptions] = React.useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (isAuthenticated) {
@@ -38,7 +42,7 @@ const NavBar = (): JSX.Element => {
 
   return (
     <>
-      {isLoginModalOpen && <LoginMethodModal close={setIsLoginModalOpen} />}
+      {loginModalOpen && <LoginMethodModal close={setLoginModalOpen} />}
       <nav className="w-screen h-20 bg-transparent p-3 mb-28">
         <div
           className={`w-full h-full flex items-center ${!isDesktop && "justify-between"}`}
@@ -51,7 +55,9 @@ const NavBar = (): JSX.Element => {
             } space-x-2 h-12`}
           >
             <div
-              className={`flex items-center rounded-2xl ${isLight ? "bg-white" : "bg-blue-600"} p-2 select-none relative`}
+              className={`flex items-center rounded-2xl ${
+                isLight ? "bg-white" : "bg-blue-600"
+              } p-2 select-none relative`}
               onMouseEnter={() => setChooseNetwork(true)}
             >
               {activeChain === "eth" && (
@@ -64,13 +70,19 @@ const NavBar = (): JSX.Element => {
                 <img src={bscLogo} alt="token logo" className="h-6 w-6 mr-1" />
               )}
               {isBigDesktop && (
-                <span className={`flex items-center mr-1 text-sm select-none ${isLight ? "text-black": "text-white"}`}>
+                <span
+                  className={`flex items-center mr-1 text-sm select-none ${
+                    isLight ? "text-black" : "text-white"
+                  }`}
+                >
                   {activeChain === "eth" && t("choose-network.networks.eth")}
                   {activeChain === "polygon" && t("choose-network.networks.matic")}
                   {activeChain === "bsc" && t("choose-network.networks.bsc")}
                 </span>
               )}
-              <ChevronDownIcon className={`h-4 w-4 ${isLight ? "text-black": "text-white"}`} />
+              <ChevronDownIcon
+                className={`h-4 w-4 ${isLight ? "text-black" : "text-white"}`}
+              />
               {chooseNetwork && (
                 <ChooseNetwork
                   isChoosing={setChooseNetwork}
@@ -83,17 +95,17 @@ const NavBar = (): JSX.Element => {
             {!isAuthenticated && (
               <div
                 className={isLight ? styles.lightButton : styles.darkButton}
-                onClick={() => setIsLoginModalOpen(true)}
+                onClick={() => setLoginModalOpen(true)}
               >
                 {t("nav.connect")}
               </div>
             )}
 
-              {/* Trigger logout */}
+            {/* Trigger logout */}
             {isAuthenticated && (
               <div
                 className={isLight ? styles.connectLight : styles.connectDark}
-                onClick={() => setIsLoginModalOpen(true)}
+                onClick={() => setLoginModalOpen(true)}
               >
                 <span className="p-1 text-xs">{accBalance}</span>
                 <span className={isLight ? styles.addressLight : styles.addressDark}>
@@ -102,13 +114,18 @@ const NavBar = (): JSX.Element => {
               </div>
             )}
 
-           
-            <div className={`flex items-center justify-center rounded-2xl py-2 px-3 ${isLight ? "bg-white" : "bg-blue-600"}`}>
+            <div
+              className={`flex items-center justify-center rounded-2xl py-2 px-3 ${
+                isLight ? "bg-white" : "bg-blue-600"
+              }`}
+            >
               <span
                 className="h-full w-full flex items-center cursor-pointer"
                 onClick={() => setShowOptions(!showOptions)}
               >
-                <DotsHorizontalIcon className={`h-5 w-5 ${isLight ? ["fill-black"] : "fill-white"}`}/>
+                <DotsHorizontalIcon
+                  className={`h-5 w-5 ${isLight ? ["fill-black"] : "fill-white"}`}
+                />
               </span>
               {showOptions && <MoreOptionsDropDown showOptions={setShowOptions} />}
             </div>
@@ -121,15 +138,17 @@ const NavBar = (): JSX.Element => {
 
 export default NavBar;
 
-
 const styles = {
   lightButton:
     "bg-orange-300 rounded-2xl p-2 border-2 border-white text-white text-light text-sm md:w-40 cursor-pointer select-none flex justify-center items-center",
   darkButton:
     "bg-blue-500 rounded-2xl p-2 border-2 border-blue-400 text-white text-light text-sm md:w-40 cursor-pointer select-none flex justify-center items-center",
-  connectLight: "rounded-2xl bg-white flex justify-between items-center flex-1 max-w-[200px] p-1 font-bold md:max-w-[200px] cursor-pointer",
-  connectDark: "rounded-2xl bg-blue-600 flex justify-between items-center flex-1 max-w-[200px] text-white p-1 font-bold md:max-w-[200px] cursor-pointer",
-  addressLight: "text-sm flex-1 rounded-2xl h-full bg-gray-200 flex items-center justify-center",
-  addressDark: "text-sm flex-1 rounded-2xl h-full bg-blue-500 flex items-center justify-center"
-
+  connectLight:
+    "rounded-2xl bg-white flex justify-between items-center flex-1 max-w-[200px] p-1 font-bold md:max-w-[200px] cursor-pointer",
+  connectDark:
+    "rounded-2xl bg-blue-600 flex justify-between items-center flex-1 max-w-[200px] text-white p-1 font-bold md:max-w-[200px] cursor-pointer",
+  addressLight:
+    "text-sm flex-1 rounded-2xl h-full bg-gray-200 flex items-center justify-center",
+  addressDark:
+    "text-sm flex-1 rounded-2xl h-full bg-blue-500 flex items-center justify-center",
 };

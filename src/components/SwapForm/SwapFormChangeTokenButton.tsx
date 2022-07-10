@@ -6,15 +6,18 @@ import bscLogo from "../../assets/images/bsc.png";
 import { useTranslation } from "react-i18next";
 import ThemeContext from "../../context/theme-context";
 import ChainContext from "../../context/chain-context";
+import type { SelectedToken } from "../../types";
 
 type SwapFormChangeTokenButtonProps = {
   initial?: boolean;
   select(val: boolean): void;
+  selected: SelectedToken;
 };
 
 const SwapFormChangeTokenButton = ({
   initial,
   select,
+  selected,
 }: SwapFormChangeTokenButtonProps): JSX.Element => {
   const { t } = useTranslation();
   const { isLight } = React.useContext(ThemeContext);
@@ -23,27 +26,37 @@ const SwapFormChangeTokenButton = ({
   return (
     <div
       className={`flex whitespace-nowrap ml-1 rounded-3xl p-2 cursor-pointer ${
-        initial ? `${isLight ? styles.changeLight : styles.changeDark}` : `${isLight ? styles.changeLight : styles.changeDark}`
+        initial
+          ? `${isLight ? styles.changeLight : styles.changeDark}`
+          : `${isLight ? styles.changeLight : styles.changeDark}`
       }`}
       onClick={() => select(true)}
     >
-      {initial && chainCtx.chain === "eth" && (
+      {initial && Object.keys(selected).length === 0 && chainCtx.chain === "eth" && (
         <img src={ethLogo} alt="token logo" className="h-6 w-6" />
       )}
-      {initial && chainCtx.chain === "polygon" && (
+      {initial && Object.keys(selected).length === 0 && chainCtx.chain === "polygon" && (
         <img src={maticLogo} alt="token logo" className="h-6 w-6" />
       )}
-      {initial && chainCtx.chain === "bsc" && (
+      {initial && Object.keys(selected).length === 0 && chainCtx.chain === "bsc" && (
         <img src={bscLogo} alt="token logo" className="h-6 w-6" />
       )}
+      {Object.keys(selected).length > 0 && (
+        <img src={selected.logo} alt="token logo" className="h-6 w-6" />
+      )}
       <span
-        className={`flex items-center ml-2 ${initial && "pr-2"} text-sm md:text-base`}
+        className={`flex items-center ${select.name && "pr-2 ml-1"} ${
+          initial && "pr-2"
+        } text-sm md:text-base`}
       >
-        {initial && chainCtx.chain === "eth" && "ETH"}
-        {initial && chainCtx.chain === "bsc" && "BSC"}
-        {initial && chainCtx.chain === "polygon" && "MATIC"}
-        {!initial && t("swap_form.select")}
-        <ChevronDownIcon className={`h-4 w-4 ${initial && "mr-2"}`} />
+        {selected.name && selected.symbol}
+        {initial && chainCtx.chain === "eth" && !selected.name && "ETH"}
+        {initial && chainCtx.chain === "bsc" && !selected.name && "BSC"}
+        {initial && chainCtx.chain === "polygon" && !selected.name && "MATIC"}
+        {!initial && Object.keys(selected).length === 0 && t("swap_form.select")}
+        <ChevronDownIcon
+          className={`h-4 w-4 ${initial && "mr-2"} ${select.name && "mr-2"}`}
+        />
       </span>
     </div>
   );

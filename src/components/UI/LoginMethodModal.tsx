@@ -93,7 +93,9 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
         {!isAuthenticating && !isAuthenticated && (
           <div className="flex-1 rounded-2xl p-2 flex flex-col justify-between">
             <div
-              className={`w-full h-[73px] flex justify-between items-center py-2 px-4 rounded-2xl ${themeCtx.isLight ? "bg-gray-100" : "bg-blue-800"} cursor-pointer`}
+              className={`w-full h-[73px] flex justify-between items-center py-2 px-4 rounded-2xl ${
+                themeCtx.isLight ? "bg-gray-100" : "bg-blue-800"
+              }  cursor-pointer`}
               onClick={loginMetamask}
             >
               <span>{t("login.metamask")}</span>
@@ -101,7 +103,9 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
             </div>
 
             <div
-              className={`w-full h-[73px] flex justify-between items-center py-2 px-4 rounded-2xl ${themeCtx.isLight ? "bg-gray-100" : "bg-blue-800"} cursor-pointer`}
+              className={`w-full h-[73px] flex justify-between items-center py-2 px-4 rounded-2xl ${
+                themeCtx.isLight ? "bg-gray-100" : "bg-blue-800"
+              } cursor-pointer`}
               onClick={loginWC}
             >
               <span>{t("login.wc")}</span>
@@ -130,11 +134,19 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
           <div className="flex flex-1 p-5 rounded-2xl">
             <div className="flex flex-1 flex-col border rounded-2xl">
               <div className="px-2 pt-3 flex items-center justify-between w-full">
-                <span className=" text-gray-500 font-medium text-xs md:text-base w-2/3">
+                <span
+                  className={`${
+                    themeCtx.isLight ? "text-gray-500" : " text-white"
+                  } p-2 font-medium text-xs md:text-base w-2/3`}
+                >
                   {t("login.connected", { wallet: walletChosen })}
                 </span>
                 <span
-                  className="w-1/3 border h-9 text-sm flex items-center justify-center rounded-2xl border-orange-400 text-orange-400 cursor-pointer"
+                  className={`w-1/3 h-9 text-sm flex items-center justify-center rounded-2xl ${
+                    themeCtx.isLight
+                      ? "border border-orange-400 text-orange-400"
+                      : "bg-gray-600 text-white"
+                  } cursor-pointer`}
                   onClick={logout}
                 >
                   {t("login.disconnect")}
@@ -143,10 +155,14 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
 
               <div className="px-4 py-2 text-xl font-semibold">{shortUserAddress}</div>
 
-              <div className="p-4 text-xl font-semibold flex justify-between">
+              <div
+                className={`p-4 text-xl font-semibold flex justify-between ${
+                  themeCtx.isLight ? " text-gray-500" : " text-white"
+                }`}
+              >
                 {!isCopying && (
                   <span
-                    className="text-gray-500 flex items-center text-sm cursor-copy"
+                    className="flex items-center text-sm cursor-copy"
                     onClick={handleCopy}
                   >
                     <DuplicateIcon className="h-4 w-4 mr-1" />
@@ -154,10 +170,7 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
                   </span>
                 )}
                 {isCopying && (
-                  <span
-                    className="text-gray-500 flex items-center text-sm"
-                    onClick={handleCopy}
-                  >
+                  <span className=" flex items-center text-sm" onClick={handleCopy}>
                     <CheckCircleIcon className="h-4 w-4 mr-1" />
                     {t("login.copied")}
                   </span>
@@ -167,7 +180,7 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
                     href={`https://etherscan.io/address/${address}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-sm flex text-gray-500"
+                    className="text-sm flex "
                   >
                     <ExternalLinkIcon className="h-4 w-4" />
                     {t("login.view")}
@@ -178,7 +191,7 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
                     href={`https://polygonscan.com/address/${address}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-sm flex text-gray-500"
+                    className="text-sm flex "
                   >
                     <ExternalLinkIcon className="h-4 w-4" />
                     {t("login.view")}
@@ -189,7 +202,7 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
                     href={`https://bscscan.com/address/${address}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-sm flex text-gray-500"
+                    className="text-sm flex "
                   >
                     <ExternalLinkIcon className="h-4 w-4" />
                     {t("login.view")}

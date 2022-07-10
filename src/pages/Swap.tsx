@@ -4,12 +4,13 @@ import { TokenList } from "../types";
 
 type SwapProps = {
   tokenList: TokenList;
+  setLoginModalOpen(val: boolean): void;
 };
 
-const Swap = ({ tokenList }: SwapProps): JSX.Element => {
+const Swap = ({ tokenList, setLoginModalOpen }: SwapProps): JSX.Element => {
   return (
     <div className={styles.container}>
-      <SwapForm tokenList={tokenList} />
+      <SwapForm tokenList={tokenList} setLoginModalOpen={setLoginModalOpen} />
     </div>
   );
 };

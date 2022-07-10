@@ -3,13 +3,21 @@ import { useTranslation } from "react-i18next";
 import SwapFormChangeTokenButton from "./SwapFormChangeTokenButton";
 import TokenSelectModal from "../UI/TokenSelectModal";
 import { TokenList } from "../../types";
+import type { SelectedToken } from "../../types";
 
 type SwapFormInputProps = {
   initial?: boolean;
   tokenList: TokenList;
+  choose(val: SelectedToken): void;
+  selected: SelectedToken;
 };
 
-const SwapFormInput = ({ initial, tokenList }: SwapFormInputProps): JSX.Element => {
+const SwapFormInput = ({
+  initial,
+  tokenList,
+  choose,
+  selected,
+}: SwapFormInputProps): JSX.Element => {
   const [isSelecting, setIsSelecting] = React.useState(false);
   const { t } = useTranslation();
 
@@ -21,9 +29,18 @@ const SwapFormInput = ({ initial, tokenList }: SwapFormInputProps): JSX.Element 
           placeholder={t("swap_form.placeholder")}
           type="number"
         />
-        <SwapFormChangeTokenButton initial={initial} select={setIsSelecting} />
+        <SwapFormChangeTokenButton
+          initial={initial}
+          select={setIsSelecting}
+          selected={selected}
+        />
         {isSelecting && (
-          <TokenSelectModal tokenList={tokenList} select={setIsSelecting} />
+          <TokenSelectModal
+            tokenList={tokenList}
+            select={setIsSelecting}
+            choose={choose}
+            isSelecting={setIsSelecting}
+          />
         )}
       </div>
     </div>
