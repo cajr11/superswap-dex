@@ -18,4 +18,5 @@ export type SelectedToken = {
   logo?: string;
   symbol?: string;
   address?: string;
+  decimals: number;
 };

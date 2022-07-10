@@ -27,7 +27,6 @@ const TokenSelectModal = ({
   const [customTokenList, setCustomTokenList] = React.useState<TokenDetails[]>(tokenList);
 
   React.useEffect(() => {
-    console.log(searchedValue.slice(0, 2));
     if (searchedValue.slice(0, 2).includes("0x")) {
       const filteredList = tokenList.filter((token) =>
         token.address.includes(searchedValue),
@@ -46,6 +45,7 @@ const TokenSelectModal = ({
       setCustomTokenList(tokenList);
     }
   }, [searchedValue, setCustomTokenList, tokenList]);
+
 
   return (
     <>

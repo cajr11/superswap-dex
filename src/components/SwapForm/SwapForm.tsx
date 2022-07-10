@@ -18,27 +18,39 @@ const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element 
   const { isLight } = React.useContext(ThemeContext);
   const { chain } = React.useContext(ChainContext);
   const { isAuthenticated } = useMoralis();
-  const [firstToken, setFirstToken] = React.useState<SelectedToken>({});
-  const [secondToken, setSecondToken] = React.useState<SelectedToken>({});
-  const [firstAmount, setFirstAmount] = React.useState(0);
-  const [secondAmount, setSecondAmount] = React.useState(0);
+  const [firstToken, setFirstToken] = React.useState<SelectedToken>({decimals: 0});
+  const [secondToken, setSecondToken] = React.useState<SelectedToken>({decimals: 0});
+  const [firstAmount, setFirstAmount] = React.useState<number | undefined>();
+  const [secondAmount, setSecondAmount] = React.useState<number | undefined>();
 
-  const amount = Number(Moralis.Units);
 
-  React.useEffect(() => {
-    const getQuote = async () => {
+    const getQuoteFirst = async (val: string) => {
+     const amount =  Number(Number(val) * (10**firstToken.decimals));
       if (firstToken.address && secondToken.address) {
         const quote = await Moralis.Plugins.oneInch.quote({
           chain, // The blockchain you want to use (eth/bsc/polygon)
           fromTokenAddress: firstToken.address, // The token you want to swap
           toTokenAddress: secondToken.address, // The token you want to receive
-          amount: "1",
+          amount
         });
         console.log(quote);
+        setSecondAmount(quote.toTokenAmount / (10**quote.toToken.decimals));
       }
     };
-    getQuote();
-  });
+
+    const getQuoteSecond = async(val: string) => {
+      const amount = Number(Number(val) * (10**secondToken.decimals))
+      if (firstToken.address && secondToken.address) {
+        const quote = await Moralis.Plugins.oneInch.quote({
+          chain, // The blockchain you want to use (eth/bsc/polygon)
+          fromTokenAddress: secondToken.address, // The token you want to swap
+          toTokenAddress: firstToken.address, // The token you want to receive
+          amount,
+        });
+        setFirstAmount(quote.toTokenAmount / (10**quote.toToken.decimals));
+      }
+    }
+
 
   return (
     <form className={isLight ? styles.light : styles.dark}>
@@ -49,11 +61,15 @@ const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element 
           tokenList={tokenList}
           choose={setFirstToken}
           selected={firstToken}
+          getQuote={getQuoteFirst}
+          value={firstAmount}
         />
         <SwapFormInput
           tokenList={tokenList}
           choose={setSecondToken}
           selected={secondToken}
+          getQuote={getQuoteSecond}
+          value={secondAmount}
         />
         {!isAuthenticated && <SwapButton setLoginModalOpen={setLoginModalOpen} />}
       </div>

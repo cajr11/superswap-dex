@@ -32,17 +32,17 @@ const SwapFormChangeTokenButton = ({
       }`}
       onClick={() => select(true)}
     >
-      {initial && Object.keys(selected).length === 0 && chainCtx.chain === "eth" && (
-        <img src={ethLogo} alt="token logo" className="h-6 w-6" />
+      {initial && !selected.name && chainCtx.chain === "eth" && (
+        <img src={ethLogo} alt="" className="h-6 w-6" />
       )}
-      {initial && Object.keys(selected).length === 0 && chainCtx.chain === "polygon" && (
-        <img src={maticLogo} alt="token logo" className="h-6 w-6" />
+      {initial && !selected.name && chainCtx.chain === "polygon" && (
+        <img src={maticLogo} alt="" className="h-6 w-6" />
       )}
-      {initial && Object.keys(selected).length === 0 && chainCtx.chain === "bsc" && (
-        <img src={bscLogo} alt="token logo" className="h-6 w-6" />
+      {initial && !selected.name && chainCtx.chain === "bsc" && (
+        <img src={bscLogo} alt="" className="h-6 w-6" />
       )}
-      {Object.keys(selected).length > 0 && (
-        <img src={selected.logo} alt="token logo" className="h-6 w-6" />
+      {selected.name && (
+        <img src={selected.logo} alt="" className="h-6 w-6" />
       )}
       <span
         className={`flex items-center ${select.name && "pr-2 ml-1"} ${
@@ -53,7 +53,7 @@ const SwapFormChangeTokenButton = ({
         {initial && chainCtx.chain === "eth" && !selected.name && "ETH"}
         {initial && chainCtx.chain === "bsc" && !selected.name && "BSC"}
         {initial && chainCtx.chain === "polygon" && !selected.name && "MATIC"}
-        {!initial && Object.keys(selected).length === 0 && t("swap_form.select")}
+        {!initial && !selected.name && t("swap_form.select")}
         <ChevronDownIcon
           className={`h-4 w-4 ${initial && "mr-2"} ${select.name && "mr-2"}`}
         />
