@@ -29,7 +29,7 @@ const TokenSelectModal = ({
   React.useEffect(() => {
     if (searchedValue.slice(0, 2).includes("0x")) {
       const filteredList = tokenList.filter((token) =>
-        token.address.includes(searchedValue),
+        token.address.toLocaleLowerCase().includes(searchedValue.toLocaleLowerCase()),
       );
       setCustomTokenList(filteredList);
     }

@@ -4,7 +4,8 @@
     "select": "Select a token",
     "insufficient": "Insufficient {{token}} balance",
     "connect": "Connect Wallet",
-    "placeholder": "0.0"
+    "placeholder": "0.0",
+    "estimated": "Estimated gas fees: "
   },
   "nav": {
     "swap": "Swap",

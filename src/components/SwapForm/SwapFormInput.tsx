@@ -13,7 +13,9 @@ type SwapFormInputProps = {
   choose(val: SelectedToken): void;
   selected: SelectedToken;
   getQuote(val: string): void
-  value: number | undefined;
+  value: number | undefined | string;
+  changeValue(val: number| undefined| string): void;
+  changeCounterValue(val: number| undefined| string): void;
 };
 
 const SwapFormInput = ({
@@ -22,16 +24,22 @@ const SwapFormInput = ({
   choose,
   selected,
   value,
-  getQuote
+  getQuote,
+  changeValue,
+  changeCounterValue
 }: SwapFormInputProps): JSX.Element => {
   const [isSelecting, setIsSelecting] = React.useState(false);
   const { t } = useTranslation();
-  const [inputValue, setInputValue] = React.useState<number | string | undefined>();
+  const [inputValue, setInputValue] = React.useState<number | undefined | string>();
 
 
   React.useEffect(() => {
-    setInputValue(value);
-  }, [value])
+    if (value === 0 || value === "") {
+      setInputValue("")
+      changeCounterValue("")
+    }
+      setInputValue(value);
+  }, [value, setInputValue, changeCounterValue])
 
 
   return (
