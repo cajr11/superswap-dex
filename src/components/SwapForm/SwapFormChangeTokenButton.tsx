@@ -51,7 +51,7 @@ const SwapFormChangeTokenButton = ({
       >
         {selected.name && selected.symbol}
         {initial && chainCtx.chain === "eth" && !selected.name && "ETH"}
-        {initial && chainCtx.chain === "bsc" && !selected.name && "BSC"}
+        {initial && chainCtx.chain === "bsc" && !selected.name && "BNB"}
         {initial && chainCtx.chain === "polygon" && !selected.name && "MATIC"}
         {!initial && !selected.name && t("swap_form.select")}
         <ChevronDownIcon
