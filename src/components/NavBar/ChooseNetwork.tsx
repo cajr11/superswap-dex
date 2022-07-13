@@ -62,7 +62,7 @@ const ChooseNetwork = ({
         </div>
         {activeChain === "eth" && (
           <a
-            href="https://etherscan.io/"
+            href="https://ropsten.etherscan.io"
             target="_blank"
             rel="noreferrer"
             className="flex justify-between items-center w-full pl-1 hover:underline cursor-pointer"
@@ -97,7 +97,7 @@ const ChooseNetwork = ({
         </div>
         {activeChain === "polygon" && (
           <a
-            href="https://polygonscan.com/"
+            href="https://mumbai.polygonscan.com/"
             target="_blank"
             rel="noreferrer"
             className="flex justify-between items-center w-full pl-1 hover:underline cursor-pointer"
@@ -132,7 +132,7 @@ const ChooseNetwork = ({
         </div>
         {activeChain === "bsc" && (
           <a
-            href="https://bscscan.com/"
+            href="https://testnet.bscscan.com/"
             target="_blank"
             rel="noreferrer"
             className="flex justify-between items-center w-full pl-1 hover:underline cursor-pointer"

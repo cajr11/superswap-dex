@@ -41,9 +41,7 @@ const SwapFormChangeTokenButton = ({
       {initial && !selected.name && chainCtx.chain === "bsc" && (
         <img src={bscLogo} alt="" className="h-6 w-6" />
       )}
-      {selected.name && (
-        <img src={selected.logo} alt="" className="h-6 w-6" />
-      )}
+      {selected.name && <img src={selected.logo} alt="" className="h-6 w-6" />}
       <span
         className={`flex items-center ${select.name && "pr-2 ml-1"} ${
           initial && "pr-2"
@@ -51,7 +49,7 @@ const SwapFormChangeTokenButton = ({
       >
         {selected.name && selected.symbol}
         {initial && chainCtx.chain === "eth" && !selected.name && "ETH"}
-        {initial && chainCtx.chain === "bsc" && !selected.name && "BSC"}
+        {initial && chainCtx.chain === "bsc" && !selected.name && "BNB"}
         {initial && chainCtx.chain === "polygon" && !selected.name && "MATIC"}
         {!initial && !selected.name && t("swap_form.select")}
         <ChevronDownIcon

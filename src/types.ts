@@ -11,7 +11,7 @@ export type TokenDetails = {
 
 export type TokenList = TokenDetails[];
 
-export type Chain = "bsc" | "eth" | "polygon";
+export type Chain = "bsc" | "eth" | "polygon" | "goerli" | "bsc testnet" | "mumbai";
 
 export type SelectedToken = {
   name?: string;
