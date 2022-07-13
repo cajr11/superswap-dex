@@ -3,25 +3,24 @@ import "./App.css";
 import Swap from "./pages/Swap";
 import NavBar from "./components/NavBar/NavBar";
 import ThemeContext from "./context/theme-context";
-import { useOneInchTokens } from "react-moralis";
-import { useMoralis, useChain } from "react-moralis";
+import { useMoralis, useChain, useOneInchTokens } from "react-moralis";
 import { TokenList } from "./types";
 import ChainContext from "./context/chain-context";
 
 function App(): JSX.Element {
-  // const { chainId, chain, account } = useChain();
   const chainCtx = useContext(ChainContext);
   const { isLight } = React.useContext(ThemeContext);
-  const { isAuthenticated, isWeb3Enabled, enableWeb3, isWeb3EnableLoading } =
-    useMoralis();
+  const { isAuthenticated, isWeb3Enabled, enableWeb3, isWeb3EnableLoading } = useMoralis();
   const { switchNetwork } = useChain();
   const { getSupportedTokens, data } = useOneInchTokens({ chain: chainCtx.chain });
   const [tokenList, setTokenList] = React.useState<TokenList | []>([]);
   const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
 
+
   React.useEffect(() => {
     const updateNetwork = async () => {
-      if (!isWeb3Enabled) enableWeb3();
+      if (!isWeb3Enabled) enableWeb3()
+
       if (!isWeb3EnableLoading) {
         if (isAuthenticated) {
           if (chainCtx.chain === "eth") await switchNetwork("0x1");
@@ -35,9 +34,9 @@ function App(): JSX.Element {
     chainCtx.chain,
     isAuthenticated,
     switchNetwork,
-    enableWeb3,
     isWeb3EnableLoading,
     isWeb3Enabled,
+    enableWeb3
   ]);
 
   // Retrieve tokens on initial render and chain switch
@@ -48,9 +47,12 @@ function App(): JSX.Element {
 
     if (data.length === 0) {
       getTokens();
+      console.log(data);
     } else {
+      console.log(data);
       const formattedData = JSON.parse(JSON.stringify(data!, null, 2));
       setTokenList(Object.values(formattedData.tokens));
+      console.log(formattedData);
     }
   }, [data, getSupportedTokens]);
 

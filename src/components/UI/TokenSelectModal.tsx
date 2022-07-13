@@ -46,7 +46,6 @@ const TokenSelectModal = ({
     }
   }, [searchedValue, setCustomTokenList, tokenList]);
 
-
   return (
     <>
       <div className="absolute top-0 left-0 w-screen h-screen bg-gray-500 z-30 opacity-20"></div>

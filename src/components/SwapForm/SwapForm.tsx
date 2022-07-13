@@ -6,6 +6,7 @@ import ThemeContext from "../../context/theme-context";
 import type { TokenList } from "../../types";
 import type { SelectedToken } from "../../types";
 import ChainContext from "../../context/chain-context";
+import { useMoralis } from "react-moralis";
 import Moralis from "moralis";
 import { useTranslation } from "react-i18next";
 
@@ -17,6 +18,7 @@ type SwapFormProps = {
 const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element => {
   const { isLight } = React.useContext(ThemeContext);
   const { chain } = React.useContext(ChainContext);
+  const { user } = useMoralis();
   const { t } = useTranslation();
   const [firstToken, setFirstToken] = React.useState<SelectedToken>({decimals: 0});
   const [secondToken, setSecondToken] = React.useState<SelectedToken>({decimals: 0});
@@ -24,13 +26,18 @@ const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element 
   const [secondAmount, setSecondAmount] = React.useState<number | undefined| string>();
   const [gas, setGas] = React.useState<number | undefined>()
 
-
     const getQuoteFirst = async (val: string) => {
      const amount =  Number(Number(val) * (10**firstToken.decimals));
+     setFirstAmount(val)
       if (amount === 0 || amount === undefined) {
         setFirstAmount("")
         setSecondAmount("")
         setGas(undefined)
+        setTimeout(() => {
+          if (secondAmount !== "") {
+            setSecondAmount("")
+          }
+        }, 300)
       } else if (firstToken.address && secondToken.address) {
         const quote = await Moralis.Plugins.oneInch.quote({
           chain, // The blockchain you want to use (eth/bsc/polygon)
@@ -45,10 +52,16 @@ const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element 
 
     const getQuoteSecond = async(val: string) => {
       const amount = Number(Number(val) * (10**secondToken.decimals))
+      setSecondAmount(val);
       if (amount === 0 || amount === undefined) {
         setFirstAmount("")
         setSecondAmount("")
         setGas(undefined)
+        setTimeout(() => {
+          if (firstAmount !== "") {
+            setFirstAmount("")
+          }
+        }, 300)
       } else if (firstToken.address && secondToken.address) {
         const quote = await Moralis.Plugins.oneInch.quote({
           chain, // The blockchain you want to use (eth/bsc/polygon)
@@ -60,6 +73,23 @@ const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element 
         setGas(quote.estimatedGas);
       }
     }
+
+    const makeSwap = async () => {
+      const amount =  Number(Number(firstAmount) * (10**firstToken.decimals));
+      const address = user?.attributes.ethAddress
+
+      const result =  await Moralis.Plugins.oneInch.swap({
+        chain,
+        fromTokenAddress: firstToken.address,
+        toTokenAddress: secondToken.address,
+        amount,
+        fromAddress: address,
+        slippage: 1
+      })
+
+      console.log(result);
+      
+    } 
 
 
   return (
@@ -88,7 +118,7 @@ const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element 
        {gas && <div className="w-full h-3 flex items-center justify-center py-4">
           <div className="w-[95%] h-full flex items-center justify-end text-sm text-white font-semibold">{t("swap_form.estimated")}{gas}</div>
         </div>}
-        <SwapButton setLoginModalOpen={setLoginModalOpen} />
+        <SwapButton setLoginModalOpen={setLoginModalOpen} trySwap={makeSwap} />
       </div>
     </form>
   );

@@ -41,9 +41,7 @@ const SwapFormChangeTokenButton = ({
       {initial && !selected.name && chainCtx.chain === "bsc" && (
         <img src={bscLogo} alt="" className="h-6 w-6" />
       )}
-      {selected.name && (
-        <img src={selected.logo} alt="" className="h-6 w-6" />
-      )}
+      {selected.name && <img src={selected.logo} alt="" className="h-6 w-6" />}
       <span
         className={`flex items-center ${select.name && "pr-2 ml-1"} ${
           initial && "pr-2"
