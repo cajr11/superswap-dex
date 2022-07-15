@@ -47,12 +47,9 @@ function App(): JSX.Element {
 
     if (data.length === 0) {
       getTokens();
-      console.log(data);
     } else {
-      console.log(data);
       const formattedData = JSON.parse(JSON.stringify(data!, null, 2));
       setTokenList(Object.values(formattedData.tokens));
-      console.log(formattedData);
     }
   }, [data, getSupportedTokens]);
 
