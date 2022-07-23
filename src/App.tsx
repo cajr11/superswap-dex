@@ -10,7 +10,7 @@ import ChainContext from "./context/chain-context";
 function App(): JSX.Element {
   const chainCtx = useContext(ChainContext);
   const { isLight } = React.useContext(ThemeContext);
-  const { isAuthenticated, isWeb3Enabled, enableWeb3, isWeb3EnableLoading } = useMoralis();
+  const { isAuthenticated, enableWeb3, isWeb3Enabled } = useMoralis();
   const { switchNetwork } = useChain();
   const { getSupportedTokens, data } = useOneInchTokens({ chain: chainCtx.chain });
   const [tokenList, setTokenList] = React.useState<TokenList | []>([]);
@@ -19,29 +19,26 @@ function App(): JSX.Element {
 
   React.useEffect(() => {
     const updateNetwork = async () => {
-      if (!isWeb3Enabled) enableWeb3()
-
-      if (!isWeb3EnableLoading) {
         if (isAuthenticated) {
           if (chainCtx.chain === "eth") await switchNetwork("0x1");
           if (chainCtx.chain === "bsc") await switchNetwork("0x38");
           if (chainCtx.chain === "polygon") await switchNetwork("0x89");
         }
       }
-    };
-    updateNetwork();
+      if(isWeb3Enabled){
+        updateNetwork();
+      }
   }, [
     chainCtx.chain,
     isAuthenticated,
     switchNetwork,
-    isWeb3EnableLoading,
-    isWeb3Enabled,
-    enableWeb3
+    isWeb3Enabled
   ]);
 
   // Retrieve tokens on initial render and chain switch
   React.useEffect(() => {
     const getTokens = async () => {
+      await enableWeb3();
       await getSupportedTokens();
     };
 
@@ -51,7 +48,7 @@ function App(): JSX.Element {
       const formattedData = JSON.parse(JSON.stringify(data!, null, 2));
       setTokenList(Object.values(formattedData.tokens));
     }
-  }, [data, getSupportedTokens]);
+  }, [data, getSupportedTokens, enableWeb3]);
 
   return (
     <div className={isLight ? styles.containerLight : styles.containerDark}>

@@ -6,7 +6,7 @@ import ThemeContext from "../../context/theme-context";
 import type { TokenList } from "../../types";
 import type { SelectedToken } from "../../types";
 import ChainContext from "../../context/chain-context";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useOneInchSwap } from "react-moralis";
 import Moralis from "moralis";
 import { useTranslation } from "react-i18next";
 
@@ -73,21 +73,32 @@ const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element 
         setGas(quote.estimatedGas);
       }
     }
+    console.log(firstToken.address);
+    console.log(secondToken.address);
+  
 
     const makeSwap = async () => {
       const amount =  Number(Number(firstAmount) * (10**firstToken.decimals));
-      const address = user?.attributes.ethAddress
+      const address = Moralis.User.current()?.get("ethAddress")
+      console.log(address);
 
-      const result =  await Moralis.Plugins.oneInch.swap({
-        chain,
-        fromTokenAddress: firstToken.address,
-        toTokenAddress: secondToken.address,
+      const options = {
+        chain: "eth",
+        fromTokenAddress: "0x04fa0d235c4abf4bcf4787af4cf447de572ef828",
+        toTokenAddress: "0x0327112423f3a68efdf1fcf402f6c5cb9f7c33fd",
         amount,
-        fromAddress: address,
+        fromAddress: "0x254a9b31a4e6a679b7202d3290d7c7ca0f92d28a",
         slippage: 1
-      })
+      }
+      await Moralis.Plugins.oneInch.approve({
+        chain: 'eth', // The blockchain you want to use (eth/bsc/polygon)
+        tokenAddress: "0x04fa0d235c4abf4bcf4787af4cf447de572ef828", // The token you want to swap
+        fromAddress: "0x254a9b31a4e6a679b7202d3290d7c7ca0f92d28a", // Your wallet address
+      });
 
-      console.log(result);
+      await Moralis.Plugins.oneInch.swap(options)
+     
+
       
     } 
 
