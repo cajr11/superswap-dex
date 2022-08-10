@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/outline";
 import { LanguageType } from "../../types";
 import ThemeContext from "../../context/theme-context";
+import i18n from "../../i18n";
 
 type MoreOptionsDropDownProps = {
   showOptions(val: boolean): void;
@@ -17,8 +18,13 @@ type MoreOptionsDropDownProps = {
 const MoreOptionsDropDown = ({ showOptions }: MoreOptionsDropDownProps): JSX.Element => {
   const { t } = useTranslation();
   const [changeLanguage, setChangeLanguage] = React.useState(false);
-  const [isSelected, setIsSelected] = React.useState<LanguageType>("English");
+  const [isSelected, setIsSelected] = React.useState<LanguageType>("en");
   const { isLight, changeTheme } = React.useContext(ThemeContext);
+
+  const selectLanguage = (lng: string) => {
+    setIsSelected(lng as LanguageType);
+    i18n.changeLanguage(lng);
+  }
 
   return (
     <span
@@ -68,17 +74,17 @@ const MoreOptionsDropDown = ({ showOptions }: MoreOptionsDropDownProps): JSX.Ele
           </button>
           <button
             className="w-full text-gray-400 flex justify-between text-sm outline-none cursor-pointer"
-            onClick={() => setIsSelected("English")}
+            onClick={() => setIsSelected("en")}
           >
             <span className="select-none">{t("nav.language.english")}</span>
-            {isSelected === "English" && <CheckIcon className="h-3 w-3" />}
+            {isSelected === "en" && <CheckIcon className="h-3 w-3" />}
           </button>
           <button
             className="w-full text-gray-400 flex justify-between text-sm outline-none cursor-pointer"
-            onClick={() => setIsSelected("Spanish")}
+            onClick={() => setIsSelected("es")}
           >
             <span className="select-none">{t("nav.language.spanish")}</span>
-            {isSelected === "Spanish" && <CheckIcon className="h-3 w-3" />}
+            {isSelected === "es" && <CheckIcon className="h-3 w-3" />}
           </button>
         </span>
       )}

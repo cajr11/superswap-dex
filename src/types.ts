@@ -1,4 +1,4 @@
-export type LanguageType = "English" | "Spanish";
+export type LanguageType = "en" | "es";
 
 export type TokenDetails = {
   logoURI: string;
