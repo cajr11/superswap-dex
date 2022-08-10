@@ -38,7 +38,6 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
         chainId: 0x1,
       })
         .then(function (user) {
-          console.log(user!.get("ethAddress"));
         })
         .catch(function (error) {
           console.log(error);

@@ -82,7 +82,7 @@ function App(): JSX.Element {
         />
       )}
 
-      {pathName === "/transactions" && <Transactions />}
+      {pathName === "/transactions" && <Transactions  setLoginModalOpen={setIsLoginModalOpen}/>}
       {!isDesktop && (
         <div className="absolute bottom-0 w-screen h-20 bg-transparent p-3 mb-6">
           <NavTabSwitcher />

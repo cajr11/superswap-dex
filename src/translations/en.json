@@ -54,5 +54,9 @@
     "submitted": "Transaction Submitted",
     "view": "View on Explorer",
     "close": "Close"
+  },
+  "transactions": {
+    "connect": "Connect Wallet",
+    "transactions": "Last 10 Transactions"
   }
 }
