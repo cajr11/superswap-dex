@@ -1,59 +1,58 @@
 {
-    "swap_form": {
-      "swap": "Swap",
-      "select": "Elige una moneda",
-      "insufficient": "Saldo de {{token}} insuficiente",
-      "connect": "Conectar cartera",
-      "placeholder": "0.0",
-      "estimated": "Tarifas estimadas de gas: "
+  "swap_form": {
+    "swap": "Cambio",
+    "select": "Elige una moneda",
+    "insufficient": "Saldo de {{token}} insuficiente",
+    "connect": "Conectar cartera",
+    "placeholder": "0.0",
+    "estimated": "Tarifas estimadas de gas: "
+  },
+  "nav": {
+    "swap": "Cambio",
+    "transactions": "Transacciones",
+    "connect": "Conectar cartera",
+    "dropdown": {
+      "language": "Idioma",
+      "dark": "Tema oscuro",
+      "light": "Tema de luz"
     },
-    "nav": {
-      "swap": "Swap",
-      "transactions": "Transacciones",
-      "connect": "Conectar cartera",
-      "dropdown": {
-        "language": "Idioma",
-        "dark": "Tema oscuro",
-        "light": "Tema de luz"
-      },
-      "language": {
-        "english": "English",
-        "spanish": "Español"
-      }
-    },
-    "choose-token": {
-      "swap": "Elige una monea",
-      "search": "Busca nombre o pegar dirección"
-    },
-    "choose-network": {
-      "select": "Elige un red",
-      "networks": {
-        "bsc": "Binance",
-        "eth": "Ethereum",
-        "matic": "Polygon"
-      },
-      "scans": {
-        "bsc": "Bscscan",
-        "eth": "Etherscan",
-        "matic": "Polygonscan"
-      }
-    },
-    "login": {
-      "account": "Cuenta",
-      "authenticate": "Verificando...",
-      "connect": "Conectar cartera",
-      "connected": "Conectada con {{ wallet }}",
-      "disconnect": "Desconectar",
-      "metamask": "Metamask",
-      "wc": "WalletConnect",
-      "copy": "Copiar dirección",
-      "copied": "Copiada",
-      "view": "Ver en el Explorador"
-    },
-    "transaction": {
-      "submitted": "Transacción enviada",
-      "view": "Ver en el Explorador",
-      "close": "Cerrar"
+    "language": {
+      "english": "English",
+      "spanish": "Español"
     }
+  },
+  "choose-token": {
+    "swap": "Elige una moneda",
+    "search": "Busca nombre o pegar dirección"
+  },
+  "choose-network": {
+    "select": "Elige un red",
+    "networks": {
+      "bsc": "Binance",
+      "eth": "Ethereum",
+      "matic": "Polygon"
+    },
+    "scans": {
+      "bsc": "Bscscan",
+      "eth": "Etherscan",
+      "matic": "Polygonscan"
+    }
+  },
+  "login": {
+    "account": "Cuenta",
+    "authenticate": "Verificando...",
+    "connect": "Conectar cartera",
+    "connected": "Conectada con {{ wallet }}",
+    "disconnect": "Desconectar",
+    "metamask": "Metamask",
+    "wc": "WalletConnect",
+    "copy": "Copiar dirección",
+    "copied": "Copiada",
+    "view": "Ver en el Explorador"
+  },
+  "transaction": {
+    "submitted": "Transacción enviada",
+    "view": "Ver en el Explorador",
+    "close": "Cerrar"
   }
-  
+}

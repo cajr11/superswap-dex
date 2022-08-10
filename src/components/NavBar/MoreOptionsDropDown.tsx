@@ -24,7 +24,7 @@ const MoreOptionsDropDown = ({ showOptions }: MoreOptionsDropDownProps): JSX.Ele
   const selectLanguage = (lng: string) => {
     setIsSelected(lng as LanguageType);
     i18n.changeLanguage(lng);
-  }
+  };
 
   return (
     <span
@@ -74,14 +74,14 @@ const MoreOptionsDropDown = ({ showOptions }: MoreOptionsDropDownProps): JSX.Ele
           </button>
           <button
             className="w-full text-gray-400 flex justify-between text-sm outline-none cursor-pointer"
-            onClick={() => setIsSelected("en")}
+            onClick={() => selectLanguage("en")}
           >
             <span className="select-none">{t("nav.language.english")}</span>
             {isSelected === "en" && <CheckIcon className="h-3 w-3" />}
           </button>
           <button
             className="w-full text-gray-400 flex justify-between text-sm outline-none cursor-pointer"
-            onClick={() => setIsSelected("es")}
+            onClick={() => selectLanguage("es")}
           >
             <span className="select-none">{t("nav.language.spanish")}</span>
             {isSelected === "es" && <CheckIcon className="h-3 w-3" />}

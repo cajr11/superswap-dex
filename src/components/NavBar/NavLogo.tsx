@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NavLogo = (): JSX.Element => {
   return (
-    <div className="basis-1/4">
+    <Link to="/" className="basis-1/4">
       <svg
         width="40"
         height="40"
@@ -22,7 +23,7 @@ const NavLogo = (): JSX.Element => {
           stroke="black"
         />
       </svg>
-    </div>
+    </Link>
   );
 };
 

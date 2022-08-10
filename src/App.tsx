@@ -7,6 +7,8 @@ import { useMoralis, useChain, useOneInchTokens } from "react-moralis";
 import { TokenList } from "./types";
 import ChainContext from "./context/chain-context";
 import SwapResultModal from "./components/SwapForm/SwapResultModal";
+import { useLocation } from "react-router-dom";
+import Transactions from "./pages/Transactions";
 
 function App(): JSX.Element {
   const chainCtx = useContext(ChainContext);
@@ -19,6 +21,8 @@ function App(): JSX.Element {
   const [showTransactionModal, setShowTransactionModal] = React.useState(false);
   const [txHash, setTxHash] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
+  const location = useLocation();
+  const pathName = location.pathname;
 
   const closeModal = () => {
     setShowTransactionModal(false);
@@ -64,13 +68,15 @@ function App(): JSX.Element {
         />
       )}
       <NavBar loginModalOpen={isLoginModalOpen} setLoginModalOpen={setIsLoginModalOpen} />
-      <Swap
+     {pathName === "/" && <Swap
         tokenList={tokenList}
         setLoginModalOpen={setIsLoginModalOpen}
         openTransactionModal={setShowTransactionModal}
         getTxHash={setTxHash}
         getErrorMessage={setErrorMessage}
-      />
+      />}
+
+      {pathName === "/transactions" && <Transactions />}
     </div>
   );
 }
