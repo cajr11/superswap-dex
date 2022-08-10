@@ -31,7 +31,7 @@ const SwapForm = ({
   const [secondToken, setSecondToken] = React.useState<SelectedToken>({ decimals: 0 });
   const [firstAmount, setFirstAmount] = React.useState<number | undefined | string>();
   const [secondAmount, setSecondAmount] = React.useState<number | undefined | string>();
-  const [gas, setGas] = React.useState<number | undefined>();
+  const [gas, setGas] = React.useState<number | undefined | string>();
 
   const getQuoteFirst = async (val: string) => {
     const amount = Number(Number(val) * 10 ** firstToken.decimals);
@@ -107,6 +107,7 @@ const SwapForm = ({
 
     setFirstAmount("");
     setSecondAmount("");
+    setGas("")
   };
 
   return (

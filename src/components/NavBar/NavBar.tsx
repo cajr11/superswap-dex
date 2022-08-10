@@ -144,9 +144,9 @@ const styles = {
   darkButton:
     "bg-blue-500 rounded-2xl p-2 border-2 border-blue-400 text-white text-light text-sm md:w-40 cursor-pointer select-none flex justify-center items-center",
   connectLight:
-    "rounded-2xl bg-white flex justify-between items-center flex-1 max-w-[200px] p-1 font-bold md:max-w-[200px] cursor-pointer",
+    "rounded-2xl bg-white flex justify-between items-center flex-1 max-w-[220px] p-1 font-bold md:max-w-[220px] cursor-pointer",
   connectDark:
-    "rounded-2xl bg-blue-600 flex justify-between items-center flex-1 max-w-[200px] text-white p-1 font-bold md:max-w-[200px] cursor-pointer",
+    "rounded-2xl bg-blue-600 flex justify-between items-center flex-1 max-w-[220px] text-white p-1 font-bold md:max-w-[220px] cursor-pointer",
   addressLight:
     "text-sm flex-1 rounded-2xl h-full bg-gray-200 flex items-center justify-center",
   addressDark:
