@@ -19,13 +19,17 @@ const NavTabSwitcher = (): JSX.Element => {
       <div className={isLight ? styles.light : styles.dark}>
         <Link
           to="/#/swap?chain=mainnet"
-          className={`flex items-center justify-center rounded-3xl w-1/2 ${pathName === "/" && !isLight ? "bg-blue-600 text-gray-50" : "text-white"} ${pathName === "/" && isLight ? "bg-white" : ""}`}
+          className={`flex items-center justify-center rounded-3xl w-1/2 ${
+            pathName === "/" && !isLight ? "bg-blue-600 text-gray-50" : ""
+          } ${pathName === "/" && isLight ? "bg-white text-black" : ""}`}
         >
           {t("nav.swap")}
         </Link>
         <Link
           to="/transactions"
-          className={`flex items-center justify-center rounded-3xl w-full ${isLight && pathName !== "/" ? "bg-white" : ""} ${pathName !== "/" && !isLight ? "bg-blue-600 text-gray-50" : "text-white"}`}
+          className={`flex items-center justify-center rounded-3xl w-full ${
+            isLight && pathName !== "/" ? "bg-white text-black" : ""
+          } ${pathName !== "/" && !isLight ? "bg-blue-600 text-gray-50" : ""}`}
         >
           {t("nav.transactions")}
         </Link>
@@ -37,10 +41,6 @@ const NavTabSwitcher = (): JSX.Element => {
 const styles = {
   light: "w-52 h-full flex justify-evenly rounded-3xl bg-gray-200 select-none",
   dark: "w-52 h-full flex justify-evenly rounded-3xl bg-blue-400 select-none",
-  swapDark: "flex items-center justify-center bg-blue-600 rounded-3xl text-gray-50 w-1/2",
-  swapLight: "flex items-center justify-center bg-white rounded-3xl w-1/2",
-  transactionLight: "flex items-center justify-center rounded-3xl w-full",
-  transctionDark: "flex items-center justify-center rounded-3xl text-white w-full",
 };
 
 export default NavTabSwitcher;

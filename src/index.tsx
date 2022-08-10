@@ -22,9 +22,9 @@ root.render(
           <AuthContextProvider>
             <BrowserRouter>
               <Routes>
-              <Route path="/" element={<App />} />
+                <Route path="/" element={<App />} />
                 <Route path="/#/swap?chain=mainnet" element={<App />} />
-                <Route path="transactions" element={<App/>} />
+                <Route path="transactions" element={<App />} />
               </Routes>
             </BrowserRouter>
           </AuthContextProvider>

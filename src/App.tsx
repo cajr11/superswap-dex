@@ -9,10 +9,14 @@ import ChainContext from "./context/chain-context";
 import SwapResultModal from "./components/SwapForm/SwapResultModal";
 import { useLocation } from "react-router-dom";
 import Transactions from "./pages/Transactions";
+import useWindowWidth from "./hooks/useWindowWidth";
+import NavTabSwitcher from "./components/NavBar/NavTabSwitcher";
 
 function App(): JSX.Element {
   const chainCtx = useContext(ChainContext);
   const { isLight } = React.useContext(ThemeContext);
+  const windowWidth = useWindowWidth();
+  const isDesktop = windowWidth >= 920;
   const { isAuthenticated, enableWeb3, isWeb3Enabled } = useMoralis();
   const { switchNetwork } = useChain();
   const { getSupportedTokens, data } = useOneInchTokens({ chain: chainCtx.chain });
@@ -68,15 +72,22 @@ function App(): JSX.Element {
         />
       )}
       <NavBar loginModalOpen={isLoginModalOpen} setLoginModalOpen={setIsLoginModalOpen} />
-     {pathName === "/" && <Swap
-        tokenList={tokenList}
-        setLoginModalOpen={setIsLoginModalOpen}
-        openTransactionModal={setShowTransactionModal}
-        getTxHash={setTxHash}
-        getErrorMessage={setErrorMessage}
-      />}
+      {pathName === "/" && (
+        <Swap
+          tokenList={tokenList}
+          setLoginModalOpen={setIsLoginModalOpen}
+          openTransactionModal={setShowTransactionModal}
+          getTxHash={setTxHash}
+          getErrorMessage={setErrorMessage}
+        />
+      )}
 
       {pathName === "/transactions" && <Transactions />}
+      {!isDesktop && (
+        <div className="absolute bottom-0 w-screen h-20 bg-transparent p-3 mb-6">
+          <NavTabSwitcher />
+        </div>
+      )}
     </div>
   );
 }
