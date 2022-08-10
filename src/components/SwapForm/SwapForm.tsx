@@ -6,102 +6,104 @@ import ThemeContext from "../../context/theme-context";
 import type { TokenList } from "../../types";
 import type { SelectedToken } from "../../types";
 import ChainContext from "../../context/chain-context";
-import { useMoralis, useOneInchSwap } from "react-moralis";
 import Moralis from "moralis";
 import { useTranslation } from "react-i18next";
 
 type SwapFormProps = {
   tokenList: TokenList;
   setLoginModalOpen(val: boolean): void;
+  openTransactionModal(val: boolean): void;
+  getTxHash(hash: string): void;
+  getErrorMessage(message: string): void;
 };
 
-const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element => {
+const SwapForm = ({
+  tokenList,
+  setLoginModalOpen,
+  openTransactionModal,
+  getTxHash,
+  getErrorMessage,
+}: SwapFormProps): JSX.Element => {
   const { isLight } = React.useContext(ThemeContext);
   const { chain } = React.useContext(ChainContext);
-  const { user } = useMoralis();
   const { t } = useTranslation();
-  const [firstToken, setFirstToken] = React.useState<SelectedToken>({decimals: 0});
-  const [secondToken, setSecondToken] = React.useState<SelectedToken>({decimals: 0});
-  const [firstAmount, setFirstAmount] = React.useState<number | undefined| string>();
-  const [secondAmount, setSecondAmount] = React.useState<number | undefined| string>();
-  const [gas, setGas] = React.useState<number | undefined>()
+  const [firstToken, setFirstToken] = React.useState<SelectedToken>({ decimals: 0 });
+  const [secondToken, setSecondToken] = React.useState<SelectedToken>({ decimals: 0 });
+  const [firstAmount, setFirstAmount] = React.useState<number | undefined | string>();
+  const [secondAmount, setSecondAmount] = React.useState<number | undefined | string>();
+  const [gas, setGas] = React.useState<number | undefined>();
 
-    const getQuoteFirst = async (val: string) => {
-     const amount =  Number(Number(val) * (10**firstToken.decimals));
-     setFirstAmount(val)
-      if (amount === 0 || amount === undefined) {
-        setFirstAmount("")
-        setSecondAmount("")
-        setGas(undefined)
-        setTimeout(() => {
-          if (secondAmount !== "") {
-            setSecondAmount("")
-          }
-        }, 300)
-      } else if (firstToken.address && secondToken.address) {
-        const quote = await Moralis.Plugins.oneInch.quote({
-          chain, // The blockchain you want to use (eth/bsc/polygon)
-          fromTokenAddress: firstToken.address, // The token you want to swap
-          toTokenAddress: secondToken.address, // The token you want to receive
-          amount
-        });
-        setSecondAmount(quote.toTokenAmount / (10**quote.toToken.decimals));
-        setGas(quote.estimatedGas);
-      }
-    };
-
-    const getQuoteSecond = async(val: string) => {
-      const amount = Number(Number(val) * (10**secondToken.decimals))
-      setSecondAmount(val);
-      if (amount === 0 || amount === undefined) {
-        setFirstAmount("")
-        setSecondAmount("")
-        setGas(undefined)
-        setTimeout(() => {
-          if (firstAmount !== "") {
-            setFirstAmount("")
-          }
-        }, 300)
-      } else if (firstToken.address && secondToken.address) {
-        const quote = await Moralis.Plugins.oneInch.quote({
-          chain, // The blockchain you want to use (eth/bsc/polygon)
-          fromTokenAddress: secondToken.address, // The token you want to swap
-          toTokenAddress: firstToken.address, // The token you want to receive
-          amount,
-        });
-        setFirstAmount(quote.toTokenAmount / (10**quote.toToken.decimals));
-        setGas(quote.estimatedGas);
-      }
-    }
-    console.log(firstToken.address);
-    console.log(secondToken.address);
-  
-
-    const makeSwap = async () => {
-      const amount =  Number(Number(firstAmount) * (10**firstToken.decimals));
-      const address = Moralis.User.current()?.get("ethAddress")
-      console.log(address);
-
-      const options = {
-        chain: "eth",
-        fromTokenAddress: "0x04fa0d235c4abf4bcf4787af4cf447de572ef828",
-        toTokenAddress: "0x0327112423f3a68efdf1fcf402f6c5cb9f7c33fd",
+  const getQuoteFirst = async (val: string) => {
+    const amount = Number(Number(val) * 10 ** firstToken.decimals);
+    setFirstAmount(val);
+    if (amount === 0 || amount === undefined) {
+      setFirstAmount("");
+      setSecondAmount("");
+      setGas(undefined);
+      setTimeout(() => {
+        if (secondAmount !== "") {
+          setSecondAmount("");
+        }
+      }, 300);
+    } else if (firstToken.address && secondToken.address) {
+      const quote = await Moralis.Plugins.oneInch.quote({
+        chain, // The blockchain you want to use (eth/bsc/polygon)
+        fromTokenAddress: firstToken.address, // The token you want to swap
+        toTokenAddress: secondToken.address, // The token you want to receive
         amount,
-        fromAddress: "0x254a9b31a4e6a679b7202d3290d7c7ca0f92d28a",
-        slippage: 1
-      }
-      await Moralis.Plugins.oneInch.approve({
-        chain: 'eth', // The blockchain you want to use (eth/bsc/polygon)
-        tokenAddress: "0x04fa0d235c4abf4bcf4787af4cf447de572ef828", // The token you want to swap
-        fromAddress: "0x254a9b31a4e6a679b7202d3290d7c7ca0f92d28a", // Your wallet address
       });
+      setSecondAmount(quote.toTokenAmount / 10 ** quote.toToken.decimals);
+      setGas(quote.estimatedGas);
+    }
+  };
 
-      await Moralis.Plugins.oneInch.swap(options)
-     
+  const getQuoteSecond = async (val: string) => {
+    const amount = Number(Number(val) * 10 ** secondToken.decimals);
+    setSecondAmount(val);
+    if (amount === 0 || amount === undefined) {
+      setFirstAmount("");
+      setSecondAmount("");
+      setGas(undefined);
+      setTimeout(() => {
+        if (firstAmount !== "") {
+          setFirstAmount("");
+        }
+      }, 300);
+    } else if (firstToken.address && secondToken.address) {
+      const quote = await Moralis.Plugins.oneInch.quote({
+        chain, // The blockchain you want to use (eth/bsc/polygon)
+        fromTokenAddress: secondToken.address, // The token you want to swap
+        toTokenAddress: firstToken.address, // The token you want to receive
+        amount,
+      });
+      setFirstAmount(quote.toTokenAmount / 10 ** quote.toToken.decimals);
+      setGas(quote.estimatedGas);
+    }
+  };
 
-      
-    } 
+  const makeSwap = async () => {
+    const amount = Number(Number(firstAmount) * 10 ** firstToken.decimals);
+    const address = await Moralis.User.current()?.get("ethAddress");
 
+    try {
+      const res = await Moralis.Plugins.oneInch.swap({
+        chain: chain,
+        fromTokenAddress: firstToken.address,
+        toTokenAddress: secondToken.address,
+        amount,
+        fromAddress: address,
+        slippage: 1,
+      });
+      getTxHash(res.transactionHash);
+    } catch (error) {
+      let message;
+      if (error instanceof Error) message = error.message;
+      else message = String((error as Error).message);
+      getErrorMessage(message);
+    }
+
+    openTransactionModal(true);
+  };
 
   return (
     <form className={isLight ? styles.light : styles.dark}>
@@ -126,9 +128,14 @@ const SwapForm = ({ tokenList, setLoginModalOpen }: SwapFormProps): JSX.Element 
           changeValue={setFirstAmount}
           changeCounterValue={setFirstAmount}
         />
-       {gas && <div className="w-full h-3 flex items-center justify-center py-4">
-          <div className="w-[95%] h-full flex items-center justify-end text-sm text-white font-semibold">{t("swap_form.estimated")}{gas}</div>
-        </div>}
+        {gas && (
+          <div className="w-full h-3 flex items-center justify-center py-4">
+            <div className="w-[95%] h-full flex items-center justify-end text-sm text-white font-semibold">
+              {t("swap_form.estimated")}
+              {gas}
+            </div>
+          </div>
+        )}
         <SwapButton setLoginModalOpen={setLoginModalOpen} trySwap={makeSwap} />
       </div>
     </form>

@@ -17,7 +17,7 @@
     "ethers": "^5.6.9",
     "i18next": "^21.8.11",
     "magic-sdk": "^8.1.1",
-    "moralis": "^1.8.1",
+    "moralis": "^1.10.1",
     "postcss": "^8.4.14",
     "react": "^18.2.0",
     "react-debounce-input": "^3.3.0",
