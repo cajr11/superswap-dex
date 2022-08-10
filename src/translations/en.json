@@ -49,5 +49,10 @@
     "copy": "Copy Address",
     "copied": "Copied",
     "view": "View on Explorer"
+  },
+  "transaction": {
+    "submitted": "Transaction Submitted",
+    "view": "View on Explorer",
+    "close": "Close"
   }
 }

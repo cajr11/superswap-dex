@@ -6,6 +6,7 @@ import ThemeContext from "./context/theme-context";
 import { useMoralis, useChain, useOneInchTokens } from "react-moralis";
 import { TokenList } from "./types";
 import ChainContext from "./context/chain-context";
+import SwapResultModal from "./components/SwapForm/SwapResultModal";
 
 function App(): JSX.Element {
   const chainCtx = useContext(ChainContext);
@@ -15,25 +16,27 @@ function App(): JSX.Element {
   const { getSupportedTokens, data } = useOneInchTokens({ chain: chainCtx.chain });
   const [tokenList, setTokenList] = React.useState<TokenList | []>([]);
   const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
+  const [showTransactionModal, setShowTransactionModal] = React.useState(false);
+  const [txHash, setTxHash] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
 
+  const closeModal = () => {
+    setShowTransactionModal(false);
+    setTxHash("");
+  };
 
   React.useEffect(() => {
     const updateNetwork = async () => {
-        if (isAuthenticated) {
-          if (chainCtx.chain === "eth") await switchNetwork("0x1");
-          if (chainCtx.chain === "bsc") await switchNetwork("0x38");
-          if (chainCtx.chain === "polygon") await switchNetwork("0x89");
-        }
+      if (isAuthenticated) {
+        if (chainCtx.chain === "eth") await switchNetwork("0x1");
+        if (chainCtx.chain === "bsc") await switchNetwork("0x38");
+        if (chainCtx.chain === "polygon") await switchNetwork("0x89");
       }
-      if(isWeb3Enabled){
-        updateNetwork();
-      }
-  }, [
-    chainCtx.chain,
-    isAuthenticated,
-    switchNetwork,
-    isWeb3Enabled
-  ]);
+    };
+    if (isWeb3Enabled) {
+      updateNetwork();
+    }
+  }, [chainCtx.chain, isAuthenticated, switchNetwork, isWeb3Enabled]);
 
   // Retrieve tokens on initial render and chain switch
   React.useEffect(() => {
@@ -52,8 +55,21 @@ function App(): JSX.Element {
 
   return (
     <div className={isLight ? styles.containerLight : styles.containerDark}>
+      {showTransactionModal && (
+        <SwapResultModal
+          closeModal={closeModal}
+          txHash={txHash}
+          errorMessage={errorMessage}
+        />
+      )}
       <NavBar loginModalOpen={isLoginModalOpen} setLoginModalOpen={setIsLoginModalOpen} />
-      <Swap tokenList={tokenList} setLoginModalOpen={setIsLoginModalOpen} />
+      <Swap
+        tokenList={tokenList}
+        setLoginModalOpen={setIsLoginModalOpen}
+        openTransactionModal={setShowTransactionModal}
+        getTxHash={setTxHash}
+        getErrorMessage={setErrorMessage}
+      />
     </div>
   );
 }
