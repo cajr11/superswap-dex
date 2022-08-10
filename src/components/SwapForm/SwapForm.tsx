@@ -31,7 +31,14 @@ const SwapForm = ({
   const [secondToken, setSecondToken] = React.useState<SelectedToken>({ decimals: 0 });
   const [firstAmount, setFirstAmount] = React.useState<number | undefined | string>();
   const [secondAmount, setSecondAmount] = React.useState<number | undefined | string>();
-  const [gas, setGas] = React.useState<number | undefined>();
+  const [gas, setGas] = React.useState<number | undefined | string>();
+
+  React.useEffect(() => {
+    setFirstToken({
+      address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      decimals: 18,
+    });
+  }, [chain]);
 
   const getQuoteFirst = async (val: string) => {
     const amount = Number(Number(val) * 10 ** firstToken.decimals);
@@ -85,6 +92,8 @@ const SwapForm = ({
     const amount = Number(Number(firstAmount) * 10 ** firstToken.decimals);
     const address = await Moralis.User.current()?.get("ethAddress");
 
+    openTransactionModal(true);
+
     try {
       const res = await Moralis.Plugins.oneInch.swap({
         chain: chain,
@@ -94,6 +103,7 @@ const SwapForm = ({
         fromAddress: address,
         slippage: 1,
       });
+      openTransactionModal(true);
       getTxHash(res.transactionHash);
     } catch (error) {
       let message;
@@ -102,7 +112,9 @@ const SwapForm = ({
       getErrorMessage(message);
     }
 
-    openTransactionModal(true);
+    setFirstAmount("");
+    setSecondAmount("");
+    setGas("");
   };
 
   return (
