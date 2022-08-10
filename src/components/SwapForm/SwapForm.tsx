@@ -33,6 +33,13 @@ const SwapForm = ({
   const [secondAmount, setSecondAmount] = React.useState<number | undefined | string>();
   const [gas, setGas] = React.useState<number | undefined | string>();
 
+  React.useEffect(() => {
+    setFirstToken({
+      address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      decimals: 18,
+    });
+  }, [chain]);
+
   const getQuoteFirst = async (val: string) => {
     const amount = Number(Number(val) * 10 ** firstToken.decimals);
     setFirstAmount(val);
@@ -107,7 +114,7 @@ const SwapForm = ({
 
     setFirstAmount("");
     setSecondAmount("");
-    setGas("")
+    setGas("");
   };
 
   return (
