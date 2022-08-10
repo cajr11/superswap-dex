@@ -85,6 +85,8 @@ const SwapForm = ({
     const amount = Number(Number(firstAmount) * 10 ** firstToken.decimals);
     const address = await Moralis.User.current()?.get("ethAddress");
 
+    openTransactionModal(true);
+
     try {
       const res = await Moralis.Plugins.oneInch.swap({
         chain: chain,
@@ -94,6 +96,7 @@ const SwapForm = ({
         fromAddress: address,
         slippage: 1,
       });
+      openTransactionModal(true);
       getTxHash(res.transactionHash);
     } catch (error) {
       let message;
@@ -102,7 +105,8 @@ const SwapForm = ({
       getErrorMessage(message);
     }
 
-    openTransactionModal(true);
+    setFirstAmount("");
+    setSecondAmount("");
   };
 
   return (

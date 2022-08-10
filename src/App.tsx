@@ -23,6 +23,7 @@ function App(): JSX.Element {
   const closeModal = () => {
     setShowTransactionModal(false);
     setTxHash("");
+    setErrorMessage("");
   };
 
   React.useEffect(() => {
