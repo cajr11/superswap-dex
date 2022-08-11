@@ -57,6 +57,8 @@
   },
   "transactions": {
     "connect": "Connect Wallet",
+    "hash": "Block Hash",
+    "no": "no.",
     "transactions": "Last 10 Transactions"
   }
 }

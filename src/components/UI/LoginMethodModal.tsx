@@ -37,8 +37,7 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
         signingMessage: "Sign in with Superswap",
         chainId: 0x1,
       })
-        .then(function (user) {
-        })
+        .then(function (user) {})
         .catch(function (error) {
           console.log(error);
         });
