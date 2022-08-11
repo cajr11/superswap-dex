@@ -54,5 +54,12 @@
     "submitted": "Transacción enviada",
     "view": "Ver en el Explorador",
     "close": "Cerrar"
+  },
+  "transactions": {
+    "connect": "Conectar cartera",
+    "hash": "Hachís de bloque",
+    "no": "no.",
+    "transactions": "Transacciones"
   }
 }
+
