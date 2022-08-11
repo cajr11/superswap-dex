@@ -15,6 +15,7 @@ type SwapFormProps = {
   openTransactionModal(val: boolean): void;
   getTxHash(hash: string): void;
   getErrorMessage(message: string): void;
+  setMadeTx(val: boolean): void;
 };
 
 const SwapForm = ({
@@ -23,6 +24,7 @@ const SwapForm = ({
   openTransactionModal,
   getTxHash,
   getErrorMessage,
+  setMadeTx,
 }: SwapFormProps): JSX.Element => {
   const { isLight } = React.useContext(ThemeContext);
   const { chain } = React.useContext(ChainContext);
@@ -105,6 +107,7 @@ const SwapForm = ({
       });
       openTransactionModal(true);
       getTxHash(res.transactionHash);
+      setMadeTx(true);
     } catch (error) {
       let message;
       if (error instanceof Error) message = error.message;

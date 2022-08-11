@@ -8,6 +8,7 @@ type SwapProps = {
   openTransactionModal(val: boolean): void;
   getTxHash(hash: string): void;
   getErrorMessage(message: string): void;
+  setMadeTx(val: boolean): void;
 };
 
 const Swap = ({
@@ -16,6 +17,7 @@ const Swap = ({
   openTransactionModal,
   getTxHash,
   getErrorMessage,
+  setMadeTx,
 }: SwapProps): JSX.Element => {
   return (
     <>
@@ -26,6 +28,7 @@ const Swap = ({
           openTransactionModal={openTransactionModal}
           getTxHash={getTxHash}
           getErrorMessage={getErrorMessage}
+          setMadeTx={setMadeTx}
         />
       </div>
     </>

@@ -25,6 +25,7 @@ function App(): JSX.Element {
   const [showTransactionModal, setShowTransactionModal] = React.useState(false);
   const [txHash, setTxHash] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
+  const [madeTx, setMadeTx] = React.useState(false);
   const location = useLocation();
   const pathName = location.pathname;
 
@@ -79,10 +80,17 @@ function App(): JSX.Element {
           openTransactionModal={setShowTransactionModal}
           getTxHash={setTxHash}
           getErrorMessage={setErrorMessage}
+          setMadeTx={setMadeTx}
         />
       )}
 
-      {pathName === "/transactions" && <Transactions  setLoginModalOpen={setIsLoginModalOpen}/>}
+      {pathName === "/transactions" && (
+        <Transactions
+          setLoginModalOpen={setIsLoginModalOpen}
+          madeTx={madeTx}
+          setMadeTx={setMadeTx}
+        />
+      )}
       {!isDesktop && (
         <div className="absolute bottom-0 w-screen h-20 bg-transparent p-3 mb-6">
           <NavTabSwitcher />
