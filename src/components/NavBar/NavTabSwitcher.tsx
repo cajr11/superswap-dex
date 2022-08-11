@@ -21,7 +21,7 @@ const NavTabSwitcher = (): JSX.Element => {
           to="/#/swap?chain=mainnet"
           className={`flex items-center justify-center rounded-3xl w-1/2 ${
             pathName === "/" && !isLight ? "bg-blue-600 text-gray-50" : ""
-          } ${pathName === "/" && isLight ? "bg-white text-black" : ""}`}
+          } ${pathName === "/" && isLight ? "bg-white text-black" : ""} ${isLight ? "text-black" : "text-white"}`}
         >
           {t("nav.swap")}
         </Link>
@@ -29,7 +29,7 @@ const NavTabSwitcher = (): JSX.Element => {
           to="/transactions"
           className={`flex items-center justify-center rounded-3xl w-full ${
             isLight && pathName !== "/" ? "bg-white text-black" : ""
-          } ${pathName !== "/" && !isLight ? "bg-blue-600 text-gray-50" : ""}`}
+          } ${pathName !== "/" && !isLight ? "bg-blue-600 text-gray-50" : ""} ${isLight ? "text-black" : "text-white"}`}
         >
           {t("nav.transactions")}
         </Link>
