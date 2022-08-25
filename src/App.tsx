@@ -17,7 +17,7 @@ function App(): JSX.Element {
   const { isLight } = React.useContext(ThemeContext);
   const windowWidth = useWindowWidth();
   const isDesktop = windowWidth >= 920;
-  const { isAuthenticated, enableWeb3, isWeb3Enabled } = useMoralis();
+  const { isAuthenticated, isInitialized, initialize } = useMoralis();
   const { switchNetwork } = useChain();
   const { getSupportedTokens, data } = useOneInchTokens({ chain: chainCtx.chain });
   const [tokenList, setTokenList] = React.useState<TokenList | []>([]);
@@ -43,15 +43,15 @@ function App(): JSX.Element {
         if (chainCtx.chain === "polygon") await switchNetwork("0x89");
       }
     };
-    if (isWeb3Enabled) {
+    if (isInitialized) {
       updateNetwork();
     }
-  }, [chainCtx.chain, isAuthenticated, switchNetwork, isWeb3Enabled]);
+  }, [chainCtx.chain, isAuthenticated, switchNetwork, isInitialized]);
 
   // Retrieve tokens on initial render and chain switch
   React.useEffect(() => {
     const getTokens = async () => {
-      await enableWeb3();
+      initialize();
       await getSupportedTokens();
     };
 
@@ -61,7 +61,7 @@ function App(): JSX.Element {
       const formattedData = JSON.parse(JSON.stringify(data!, null, 2));
       setTokenList(Object.values(formattedData.tokens));
     }
-  }, [data, getSupportedTokens, enableWeb3]);
+  }, [data, getSupportedTokens, initialize]);
 
   return (
     <div className={isLight ? styles.containerLight : styles.containerDark}>

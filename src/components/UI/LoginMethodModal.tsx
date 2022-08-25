@@ -12,6 +12,7 @@ import ThemeContext from "../../context/theme-context";
 import { useMoralis } from "react-moralis";
 import { Oval } from "react-loader-spinner";
 import ChainContext from "../../context/chain-context";
+import Moralis from "moralis"
 
 type LoginMethodModalProps = {
   close(val: boolean): void;
@@ -31,8 +32,9 @@ const LoginMethodModal = ({ close }: LoginMethodModalProps): JSX.Element => {
     String(user?.attributes.ethAddress).slice(-4);
 
   const loginMetamask = async () => {
+    console.log("yes");
     if (!isAuthenticated) {
-      await authenticate({
+      await Moralis.authenticate({
         provider: "metamask",
         signingMessage: "Sign in with Superswap",
         chainId: 0x1,
