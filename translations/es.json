@@ -30,12 +30,14 @@
     "networks": {
       "eth": "Ethereum",
       "matic": "Polygon",
-      "arbitrum": "Arbitrum"
+      "arbitrum": "Arbitrum",
+      "base": "Base"
     },
     "scans": {
       "eth": "Etherscan",
       "matic": "Polygonscan",
-      "arbitrum": "Arbiscan"
+      "arbitrum": "Arbiscan",
+      "base": "Basescan"
     }
   },
   "login": {
@@ -52,8 +54,17 @@
   },
   "transaction": {
     "submitted": "Transacción enviada",
+    "pending": "Procesando transacción...",
+    "failed": "Transacción fallida",
     "view": "Ver en el Explorador",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "errors": {
+      "rejected": "Transacción cancelada por el usuario",
+      "insufficient": "Fondos insuficientes para esta transacción",
+      "gas": "Error en estimación de gas. Intenta aumentar el deslizamiento",
+      "network": "Error de red. Por favor intenta de nuevo",
+      "approval": "Se requiere aprobación del token antes del intercambio"
+    }
   },
   "transactions": {
     "connect": "Conectar cartera",

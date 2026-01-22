@@ -30,12 +30,14 @@
     "networks": {
       "eth": "Ethereum",
       "matic": "Polygon",
-      "arbitrum": "Arbitrum"
+      "arbitrum": "Arbitrum",
+      "base": "Base"
     },
     "scans": {
       "eth": "Etherscan",
       "matic": "Polygonscan",
-      "arbitrum": "Arbiscan"
+      "arbitrum": "Arbiscan",
+      "base": "Basescan"
     }
   },
   "login": {
@@ -52,8 +54,17 @@
   },
   "transaction": {
     "submitted": "Transaction Submitted",
+    "pending": "Processing transaction...",
+    "failed": "Transaction Failed",
     "view": "View on Explorer",
-    "close": "Close"
+    "close": "Close",
+    "errors": {
+      "rejected": "Transaction was cancelled by user",
+      "insufficient": "Insufficient funds for this transaction",
+      "gas": "Gas estimation failed. Try increasing slippage",
+      "network": "Network error. Please try again",
+      "approval": "Token approval required before swap"
+    }
   },
   "transactions": {
     "connect": "Connect Wallet",
