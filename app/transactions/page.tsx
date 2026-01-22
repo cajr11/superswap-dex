@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { useTranslation } from 'react-i18next';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
@@ -21,7 +21,6 @@ export default function TransactionsPage() {
 
   const [loginModalOpen, setLoginModalOpen] = useState(false);
 
-  // Fetch transactions using the custom hook
   const { data: transactions = [], isLoading, refetch } = useTransactions(chain);
 
   return (
