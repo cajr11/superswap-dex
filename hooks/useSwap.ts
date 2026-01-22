@@ -55,8 +55,9 @@ export function useSwap(chain: Chain) {
         throw new Error((swapData as { error: string }).error);
       }
 
-      // gxecute the transaction using wagmi
+      // execute the transaction using wagmi
       const txHash = await sendTransactionAsync({
+        chainId,
         to: swapData.tx.to as `0x${string}`,
         data: swapData.tx.data as `0x${string}`,
         value: BigInt(swapData.tx.value || 0),

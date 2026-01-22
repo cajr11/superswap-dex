@@ -7,13 +7,19 @@ import { useTheme } from '@/context/theme-context';
 type SwapButtonProps = {
   setLoginModalOpen: (val: boolean) => void;
   trySwap: () => void;
+  tryApprove?: () => void;
   isLoading?: boolean;
+  needsApproval?: boolean;
+  isApproving?: boolean;
 }
 
 export default function SwapButton({
   setLoginModalOpen,
   trySwap,
+  tryApprove,
   isLoading = false,
+  needsApproval = false,
+  isApproving = false,
 }: SwapButtonProps) {
   const { t } = useTranslation();
   const { isLight } = useTheme();
@@ -23,27 +29,30 @@ export default function SwapButton({
     e.preventDefault();
     if (!isConnected) {
       setLoginModalOpen(true);
+    } else if (needsApproval && tryApprove) {
+      tryApprove();
     } else {
       trySwap();
     }
+  };
+
+  const getButtonText = () => {
+    if (!isConnected) return t('swap_form.connect');
+    if (isApproving) return 'Approving...';
+    if (needsApproval) return 'Approve';
+    if (isLoading) return 'Loading...';
+    return t('swap_form.swap');
   };
 
   return (
     <button
       className={isLight ? styles.lightContainer : styles.darkContainer}
       onClick={handleClick}
-      disabled={isLoading}
+      disabled={isLoading || isApproving}
     >
-      {!isConnected && (
-        <div className={isLight ? styles.lightButton : styles.darkButton}>
-          {t('swap_form.connect')}
-        </div>
-      )}
-      {isConnected && (
-        <div className={isLight ? styles.lightButton : styles.darkButton}>
-          {isLoading ? 'Loading...' : t('swap_form.swap')}
-        </div>
-      )}
+      <div className={isLight ? styles.lightButton : styles.darkButton}>
+        {getButtonText()}
+      </div>
     </button>
   );
 }

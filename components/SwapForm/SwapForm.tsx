@@ -10,6 +10,7 @@ import { useTheme } from '@/context/theme-context';
 import { useChainContext } from '@/context/chain-context';
 import { useQuote } from '@/hooks/useQuote';
 import { useSwap } from '@/hooks/useSwap';
+import { useTokenApproval } from '@/hooks/useTokenApproval';
 import { NATIVE_TOKEN_ADDRESS } from '@/types';
 import type { TokenList, SelectedToken } from '@/types';
 
@@ -60,6 +61,25 @@ export default function SwapForm({
   // Swap hook
   const { mutateAsync: executeSwap, isPending: isSwapping } = useSwap(chain);
 
+  // Token approval hook
+  const {
+    needsApproval,
+    approve,
+    isApproving,
+    fetchSpenderAddress,
+  } = useTokenApproval({
+    chain,
+    tokenAddress: firstToken.address,
+    amount: amountInWei,
+  });
+
+  // Fetch spender address when token changes
+  useEffect(() => {
+    if (firstToken.address && firstToken.address.toLowerCase() !== NATIVE_TOKEN_ADDRESS.toLowerCase()) {
+      fetchSpenderAddress();
+    }
+  }, [firstToken.address, fetchSpenderAddress]);
+
   // Set default first token to native token on chain change
   useEffect(() => {
     setFirstToken({
@@ -101,6 +121,16 @@ export default function SwapForm({
     },
     []
   );
+
+  const handleApprove = async () => {
+    try {
+      await approve();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Approval failed';
+      getErrorMessage(message);
+      openTransactionModal(true);
+    }
+  };
 
   const makeSwap = async () => {
     if (!firstToken.address || !secondToken.address || !amountInWei || !address) {
@@ -164,7 +194,10 @@ export default function SwapForm({
         <SwapButton
           setLoginModalOpen={setLoginModalOpen}
           trySwap={makeSwap}
+          tryApprove={handleApprove}
           isLoading={isSwapping || isQuoteLoading}
+          needsApproval={needsApproval}
+          isApproving={isApproving}
         />
       </div>
     </form>

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
 import { useAccount, useSwitchChain } from 'wagmi';
-import { CHAIN_MAP } from '@/lib/chains';
+import { ONEINCH_CHAIN_IDS } from '@/lib/chains';
 import type { Chain } from '@/types';
 
 type ChainContextValue = {
@@ -31,7 +31,7 @@ export function ChainContextProvider({ children }: ChainContextProviderProps) {
       // if wallet is connected, switch the network in the wallet
       if (isConnected && switchChain) {
         try {
-          switchChain({ chainId: CHAIN_MAP[newChain] });
+          switchChain({ chainId: ONEINCH_CHAIN_IDS[newChain] });
         } catch (error) {
           console.error('Failed to switch network:', error);
         }

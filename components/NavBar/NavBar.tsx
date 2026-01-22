@@ -12,7 +12,7 @@ import ChooseNetwork from './ChooseNetwork';
 import WalletModal from '../UI/WalletModal';
 import { useTheme } from '@/context/theme-context';
 import { useChainContext } from '@/context/chain-context';
-import { CHAIN_MAP, CHAIN_METADATA } from '@/lib/chains';
+import { ONEINCH_CHAIN_IDS, CHAIN_METADATA } from '@/lib/chains';
 import useWindowWidth from '@/hooks/useWindowWidth';
 import type { Chain } from '@/types';
 
@@ -31,7 +31,7 @@ export default function NavBar({ loginModalOpen, setLoginModalOpen }: NavBarProp
   const { chain } = useChainContext();
   const { data: balance } = useBalance({
     address,
-    chainId: CHAIN_MAP[chain],
+    chainId: ONEINCH_CHAIN_IDS[chain],
   });
   const [chooseNetwork, setChooseNetwork] = useState(false);
   const [activeChain, setActiveChain] = useState<Chain>('eth');
