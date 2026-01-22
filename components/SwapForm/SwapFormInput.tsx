@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import SwapFormChangeTokenButton from './SwapFormChangeTokenButton';
 import TokenSelectModal from '../UI/TokenSelectModal';
+import { useTheme } from '@/context/theme-context';
 import type { TokenList, SelectedToken } from '@/types';
 
 type SwapFormInputProps = {
@@ -28,6 +29,7 @@ export default function SwapFormInput({
 }: SwapFormInputProps) {
   const [isSelecting, setIsSelecting] = useState(false);
   const { t } = useTranslation();
+  const { isLight } = useTheme();
   const [inputValue, setInputValue] = useState<number | undefined | string>();
   const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(null);
 
@@ -57,10 +59,14 @@ export default function SwapFormInput({
   };
 
   return (
-    <div className="w-full h-20 rounded-2xl mb-2 bg-gray-100 flex items-center p-5">
+    <div className={`w-full h-20 rounded-2xl mb-2 flex items-center p-5 ${
+      isLight ? 'bg-[#E8E8E8]' : 'bg-[#1a1a1a]'
+    }`}>
       <div className="flex items-center w-full">
         <input
-          className="min-w-0 h-full rounded-2xl bg-gray-100 text-3xl font-medium font-inc focus:outline-none px-1"
+          className={`min-w-0 h-full rounded-2xl text-3xl font-medium font-inc focus:outline-none px-1 ${
+            isLight ? 'bg-[#E8E8E8] text-[#333333] placeholder-[#999999]' : 'bg-[#1a1a1a] text-white placeholder-[#646464]'
+          }`}
           placeholder={t('swap_form.placeholder')}
           type="number"
           onChange={handleInputChange}

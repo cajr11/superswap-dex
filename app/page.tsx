@@ -43,8 +43,8 @@ export default function SwapPage() {
     <div
       className={`min-h-screen flex flex-col ${
         isLight
-          ? 'bg-gradient-to-b from-amber-400 to-orange-600'
-          : 'bg-gradient-to-b from-slate-700 to-slate-900'
+          ? 'bg-gradient-to-b from-[#2CC295] to-[#03624C]'
+          : 'bg-[#000000]'
       }`}
     >
       <NavBar loginModalOpen={loginModalOpen} setLoginModalOpen={setLoginModalOpen} />

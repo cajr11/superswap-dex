@@ -46,15 +46,23 @@ export default function TokenSelectModal({
       <div className="absolute top-0 left-0 w-screen h-screen bg-gray-500 z-30 opacity-20" />
       <div className={isLight ? styles.light : styles.dark}>
         {/* Modal Header */}
-        <div className="h-10 w-full flex flex-row justify-between items-center px-5">
+        <div className={`h-10 w-full flex flex-row justify-between items-center px-5 ${
+          isLight ? 'text-black' : 'text-white'
+        }`}>
           <span className="font-semibold text-lg">{t('choose-token.swap')}</span>
           <XMarkIcon className="h-6 w-6 cursor-pointer" onClick={() => select(false)} />
         </div>
 
         {/* Modal Search Bar */}
-        <div className="h-24 p-3 pb-5 border-b border-b-gray-200">
+        <div className={`h-24 p-3 pb-5 border-b ${
+          isLight ? 'border-b-gray-200' : 'border-b-[#646464]'
+        }`}>
           <input
-            className="border border-gray-200 w-full h-full rounded-2xl px-3 focus:outline-none"
+            className={`w-full h-full rounded-2xl px-3 focus:outline-none ${
+              isLight
+                ? 'border border-gray-200 bg-white text-black placeholder-gray-400'
+                : 'border border-[#646464] bg-[#1a1a1a] text-white placeholder-[#A7A7A7]'
+            }`}
             placeholder={t('choose-token.search')}
             onChange={(e) => setSearchedValue(e.target.value)}
           />
@@ -85,7 +93,7 @@ export default function TokenSelectModal({
 }
 
 const styles = {
-  dark: 'absolute w-screen h-[70%] bottom-0 left-0 bg-blue-800 rounded-t-2xl z-40 py-5 flex flex-col md:w-[450px] md:h-[450px] md:m-auto md:top-0 md:right-0 md:rounded-xl md:py-2 md:pb-0',
+  dark: 'absolute w-screen h-[70%] bottom-0 left-0 bg-[#333333] rounded-t-2xl z-40 py-5 flex flex-col md:w-[450px] md:h-[450px] md:m-auto md:top-0 md:right-0 md:rounded-xl md:py-2 md:pb-0',
   light:
     'absolute w-screen h-[70%] bottom-0 left-0 bg-white rounded-t-2xl z-40 py-5 flex flex-col md:w-[450px] md:h-[450px] md:m-auto md:top-0 md:right-0 md:rounded-xl md:py-2 md:pb-0',
 };

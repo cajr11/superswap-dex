@@ -66,15 +66,15 @@ export default function NavBar({ loginModalOpen, setLoginModalOpen }: NavBarProp
           >
             <div
               className={`flex items-center rounded-2xl ${
-                isLight ? 'bg-white' : 'bg-blue-600'
+                isLight ? 'bg-white' : 'bg-[#333333]'
               } p-2 select-none relative`}
               onMouseEnter={() => setChooseNetwork(true)}
             >
               <Image
                 src={CHAIN_METADATA[activeChain].logo}
                 alt="chain logo"
-                width={24}
-                height={24}
+                width={23}
+                height={23}
                 className="mr-1"
               />
               {isBigDesktop && (
@@ -112,7 +112,16 @@ export default function NavBar({ loginModalOpen, setLoginModalOpen }: NavBarProp
                 className={isLight ? styles.connectLight : styles.connectDark}
                 onClick={() => setLoginModalOpen(true)}
               >
-                <span className="p-1 text-xs">{formattedBalance}</span>
+                <div className="flex items-center p-1">
+                  <Image
+                    src={CHAIN_METADATA[activeChain].logo}
+                    alt={activeChain}
+                    width={16}
+                    height={16}
+                    className="mr-1.5"
+                  />
+                  <span className="text-xs">{formattedBalance}</span>
+                </div>
                 <span className={isLight ? styles.addressLight : styles.addressDark}>
                   {shortAddress}
                 </span>
@@ -121,7 +130,7 @@ export default function NavBar({ loginModalOpen, setLoginModalOpen }: NavBarProp
 
             <div
               className={`flex items-center justify-center rounded-2xl py-2 px-3 ${
-                isLight ? 'bg-white' : 'bg-blue-600'
+                isLight ? 'bg-white' : 'bg-[#333333]'
               }`}
             >
               <span
@@ -143,15 +152,15 @@ export default function NavBar({ loginModalOpen, setLoginModalOpen }: NavBarProp
 
 const styles = {
   lightButton:
-    'bg-orange-300 rounded-2xl p-2 border-2 border-white text-white text-light text-sm md:w-40 cursor-pointer select-none flex justify-center items-center',
+    'bg-[#2CC295] rounded-2xl p-2 border-2 border-white text-white text-light text-sm md:w-40 cursor-pointer select-none flex justify-center items-center hover:bg-[#03624C] transition-colors',
   darkButton:
-    'bg-blue-500 rounded-2xl p-2 border-2 border-blue-400 text-white text-light text-sm md:w-40 cursor-pointer select-none flex justify-center items-center',
+    'bg-[#2CC295] rounded-2xl p-2 border-2 border-[#03624C] text-white text-light text-sm md:w-40 cursor-pointer select-none flex justify-center items-center hover:bg-[#03624C] transition-colors',
   connectLight:
     'rounded-2xl bg-white flex justify-between items-center flex-1 max-w-[220px] p-1 font-bold md:max-w-[220px] cursor-pointer',
   connectDark:
-    'rounded-2xl bg-blue-600 flex justify-between items-center flex-1 max-w-[220px] text-white p-1 font-bold md:max-w-[220px] cursor-pointer',
+    'rounded-2xl bg-[#333333] flex justify-between items-center flex-1 max-w-[220px] text-white p-1 font-bold md:max-w-[220px] cursor-pointer',
   addressLight:
-    'text-sm flex-1 rounded-2xl h-full bg-gray-200 flex items-center justify-center',
+    'text-sm flex-1 rounded-2xl h-full bg-[#00DF81] text-[#03624C] flex items-center justify-center',
   addressDark:
-    'text-sm flex-1 rounded-2xl h-full bg-blue-500 flex items-center justify-center',
+    'text-sm flex-1 rounded-2xl h-full bg-[#00DF81] text-[#03624C] flex items-center justify-center',
 };

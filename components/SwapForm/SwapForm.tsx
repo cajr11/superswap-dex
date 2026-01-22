@@ -173,6 +173,6 @@ export default function SwapForm({
 
 const styles = {
   light:
-    'border-2 border-orange-400 bg-orange-400 rounded-3xl h-90 w-11/12 sm:w-[500px]',
-  dark: 'border-2 border-blue-700 bg-blue-700 rounded-3xl h-90 w-11/12 sm:w-[500px]',
+    'border-2 border-[#A7A7A7] bg-[#F9F9F9] rounded-3xl h-90 w-11/12 sm:w-[500px]',
+  dark: 'border-2 border-[#646464] bg-[#333333] rounded-3xl h-90 w-11/12 sm:w-[500px]',
 };

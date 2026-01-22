@@ -30,13 +30,15 @@ export default function MoreOptionsDropDown({ showOptions }: MoreOptionsDropDown
 
   return (
     <span
-      className="bg-white min-w-[180px] h-20 rounded-lg absolute right-3 top-20 shadow-md p-3 flex flex-col justify-between z-50"
+      className={`min-w-[180px] h-20 rounded-lg absolute right-3 top-20 shadow-md p-3 flex flex-col justify-between z-50 ${
+        isLight ? 'bg-white' : 'bg-[#333333]'
+      }`}
       onMouseLeave={() => showOptions(false)}
     >
       {!changeLanguage && (
         <>
           <button
-            className="w-full text-gray-400 flex justify-between text-sm cursor-pointer"
+            className={`w-full flex justify-between text-sm cursor-pointer ${isLight ? 'text-gray-400' : 'text-[#A7A7A7]'}`}
             onClick={() => setChangeLanguage(true)}
           >
             <span className="select-none">{t('nav.dropdown.language')}</span>
@@ -53,7 +55,7 @@ export default function MoreOptionsDropDown({ showOptions }: MoreOptionsDropDown
           )}
           {!isLight && (
             <button
-              className="w-full text-gray-400 flex justify-between text-sm cursor-pointer"
+              className="w-full text-[#A7A7A7] flex justify-between text-sm cursor-pointer"
               onClick={changeTheme}
             >
               <span className="select-none">{t('nav.dropdown.light')}</span>
@@ -65,20 +67,20 @@ export default function MoreOptionsDropDown({ showOptions }: MoreOptionsDropDown
       {changeLanguage && (
         <span className="h-full flex flex-col justify-between">
           <button
-            className="w-full text-gray-400 flex justify-between text-sm mb-1 outline-none cursor-pointer"
+            className={`w-full flex justify-between text-sm mb-1 outline-none cursor-pointer ${isLight ? 'text-gray-400' : 'text-[#A7A7A7]'}`}
             onClick={() => setChangeLanguage(false)}
           >
             <ChevronLeftIcon className="h-3 w-3" />
           </button>
           <button
-            className="w-full text-gray-400 flex justify-between text-sm outline-none cursor-pointer"
+            className={`w-full flex justify-between text-sm outline-none cursor-pointer ${isLight ? 'text-gray-400' : 'text-[#A7A7A7]'}`}
             onClick={() => selectLanguage('en')}
           >
             <span className="select-none">{t('nav.language.english')}</span>
             {isSelected === 'en' && <CheckIcon className="h-3 w-3" />}
           </button>
           <button
-            className="w-full text-gray-400 flex justify-between text-sm outline-none cursor-pointer"
+            className={`w-full flex justify-between text-sm outline-none cursor-pointer ${isLight ? 'text-gray-400' : 'text-[#A7A7A7]'}`}
             onClick={() => selectLanguage('es')}
           >
             <span className="select-none">{t('nav.language.spanish')}</span>

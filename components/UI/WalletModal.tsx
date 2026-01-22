@@ -50,7 +50,9 @@ export default function WalletModal({ close }: WalletModalProps) {
         onClick={() => close(false)}
       />
       <div className={isLight ? styles.lightContainer : styles.darkContainer}>
-        <div className="h-10 w-full flex flex-row justify-between items-center px-5">
+        <div className={`h-10 w-full flex flex-row justify-between items-center px-5 ${
+          isLight ? 'text-[#333333]' : 'text-white'
+        }`}>
           {!isConnected && (
             <span className="font-semibold text-lg">{t('login.connect')}</span>
           )}
@@ -67,11 +69,7 @@ export default function WalletModal({ close }: WalletModalProps) {
               {({ openConnectModal }) => (
                 <button
                   onClick={openConnectModal}
-                  className={`w-full py-4 px-6 rounded-2xl font-semibold ${
-                    isLight
-                      ? 'bg-orange-400 text-white hover:bg-orange-500'
-                      : 'bg-blue-500 text-white hover:bg-blue-600'
-                  }`}
+                  className="w-full py-4 px-6 rounded-2xl font-semibold bg-[#2CC295] text-white hover:bg-[#03624C] transition-colors"
                 >
                   {t('login.connect')}
                 </button>
@@ -88,10 +86,10 @@ export default function WalletModal({ close }: WalletModalProps) {
                 height={50}
                 width={50}
                 strokeWidth={5}
-                color="black"
-                secondaryColor="grey"
+                color={isLight ? '#2CC295' : '#00DF81'}
+                secondaryColor={isLight ? '#03624C' : '#333333'}
               />
-              <span>{t('login.authenticate')}</span>
+              <span className={isLight ? 'text-[#333333]' : 'text-white'}>{t('login.authenticate')}</span>
             </div>
           </div>
         )}
@@ -99,37 +97,37 @@ export default function WalletModal({ close }: WalletModalProps) {
         {/* Connected state */}
         {isConnected && (
           <div className="flex flex-1 p-5 rounded-2xl">
-            <div className="flex flex-1 flex-col border rounded-2xl">
+            <div className={`flex flex-1 flex-col border rounded-2xl ${
+              isLight ? 'border-[#A7A7A7]' : 'border-[#646464]'
+            }`}>
               <div className="px-2 pt-3 flex items-center justify-between w-full">
                 <span
                   className={`${
-                    isLight ? 'text-gray-500' : 'text-white'
+                    isLight ? 'text-[#646464]' : 'text-[#A7A7A7]'
                   } p-2 font-medium text-xs md:text-base w-2/3`}
                 >
                   {t('login.connected', { wallet: 'Wallet' })}
                 </span>
                 <span
-                  className={`w-1/3 h-9 text-sm flex items-center justify-center rounded-2xl ${
-                    isLight
-                      ? 'border border-orange-400 text-orange-400'
-                      : 'bg-gray-600 text-white'
-                  } cursor-pointer`}
+                  className="w-1/3 h-9 text-sm flex items-center justify-center rounded-2xl bg-[#2CC295] text-white hover:bg-[#03624C] transition-colors cursor-pointer"
                   onClick={() => disconnect()}
                 >
                   {t('login.disconnect')}
                 </span>
               </div>
 
-              <div className="px-4 py-2 text-xl font-semibold">{shortAddress}</div>
+              <div className={`px-4 py-2 text-xl font-semibold ${
+                isLight ? 'text-[#333333]' : 'text-white'
+              }`}>{shortAddress}</div>
 
               <div
                 className={`p-4 text-xl font-semibold flex justify-between ${
-                  isLight ? 'text-gray-500' : 'text-white'
+                  isLight ? 'text-[#646464]' : 'text-[#A7A7A7]'
                 }`}
               >
                 {!isCopying && (
                   <span
-                    className="flex items-center text-sm cursor-copy"
+                    className="flex items-center text-sm cursor-copy hover:text-[#2CC295] transition-colors"
                     onClick={handleCopy}
                   >
                     <DocumentDuplicateIcon className="h-4 w-4 mr-1" />
@@ -137,7 +135,7 @@ export default function WalletModal({ close }: WalletModalProps) {
                   </span>
                 )}
                 {isCopying && (
-                  <span className="flex items-center text-sm">
+                  <span className="flex items-center text-sm text-[#00DF81]">
                     <CheckCircleIcon className="h-4 w-4 mr-1" />
                     {t('login.copied')}
                   </span>
@@ -146,7 +144,7 @@ export default function WalletModal({ close }: WalletModalProps) {
                   href={explorerUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-sm flex"
+                  className="text-sm flex hover:text-[#2CC295] transition-colors"
                 >
                   <ArrowTopRightOnSquareIcon className="h-4 w-4" />
                   {t('login.view')}
@@ -162,7 +160,7 @@ export default function WalletModal({ close }: WalletModalProps) {
 
 const styles = {
   lightContainer:
-    'absolute w-[350px] h-[260px] bottom-0 left-0 top-0 right-0 m-auto bg-white rounded-t-2xl z-40 py-5 flex flex-col md:w-[450px] md:h-[220px] md:pb-2 rounded-xl md:py-2 md:pb-0',
+    'absolute w-[350px] h-[260px] bottom-0 left-0 top-0 right-0 m-auto bg-[#F9F9F9] rounded-t-2xl z-40 py-5 flex flex-col md:w-[450px] md:h-[220px] md:pb-2 rounded-xl md:py-2 md:pb-0',
   darkContainer:
-    'absolute w-[350px] h-[260px] bottom-0 left-0 top-0 right-0 m-auto bg-blue-900 rounded-t-2xl z-40 py-5 flex flex-col md:w-[450px] md:h-[220px] md:pb-2 rounded-xl md:py-2 md:pb-0 text-gray-200',
+    'absolute w-[350px] h-[260px] bottom-0 left-0 top-0 right-0 m-auto bg-[#333333] rounded-t-2xl z-40 py-5 flex flex-col md:w-[450px] md:h-[220px] md:pb-2 rounded-xl md:py-2 md:pb-0',
 };

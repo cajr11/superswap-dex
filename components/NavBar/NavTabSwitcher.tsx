@@ -21,9 +21,9 @@ export default function NavTabSwitcher() {
         <Link
           href="/"
           className={`flex items-center justify-center rounded-3xl w-1/2 ${
-            pathname === '/' && !isLight ? 'bg-blue-600 text-gray-50' : ''
-          } ${pathname === '/' && isLight ? 'bg-white text-black' : ''} ${
-            isLight ? 'text-black' : 'text-white'
+            pathname === '/'
+              ? 'bg-[#2CC295] text-white'
+              : isLight ? 'text-white' : 'text-[#A7A7A7]'
           }`}
         >
           {t('nav.swap')}
@@ -31,9 +31,9 @@ export default function NavTabSwitcher() {
         <Link
           href="/transactions"
           className={`flex items-center justify-center rounded-3xl w-full ${
-            isLight && pathname !== '/' ? 'bg-white text-black' : ''
-          } ${pathname !== '/' && !isLight ? 'bg-blue-600 text-gray-50' : ''} ${
-            isLight ? 'text-black' : 'text-white'
+            pathname !== '/'
+              ? 'bg-[#2CC295] text-white'
+              : isLight ? 'text-white' : 'text-[#A7A7A7]'
           }`}
         >
           {t('nav.transactions')}
@@ -44,6 +44,6 @@ export default function NavTabSwitcher() {
 }
 
 const styles = {
-  light: 'w-52 h-full flex justify-evenly rounded-3xl bg-gray-200 select-none',
-  dark: 'w-52 h-full flex justify-evenly rounded-3xl bg-blue-400 select-none',
+  light: 'w-52 h-full flex justify-evenly rounded-3xl bg-[#00DF81] select-none',
+  dark: 'w-52 h-full flex justify-evenly rounded-3xl bg-[#1a1a1a] select-none',
 };

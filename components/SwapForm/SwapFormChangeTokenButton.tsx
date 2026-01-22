@@ -36,8 +36,9 @@ export default function SwapFormChangeTokenButton({
         <Image
           src={chainMeta.logo}
           alt={chain}
-          width={24}
-          height={24}
+          width={18}
+          height={18}
+          className="mr-1.5"
         />
       )}
       {selected.name && selected.logo && (
@@ -58,6 +59,6 @@ export default function SwapFormChangeTokenButton({
 }
 
 const styles = {
-  changeLight: 'bg-orange-400 text-gray-200',
-  changeDark: 'bg-blue-400 text-gray-200',
+  changeLight: 'bg-[#2CC295] text-white',
+  changeDark: 'bg-[#2CC295] text-white',
 };

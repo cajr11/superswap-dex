@@ -3,6 +3,7 @@
 import { useTranslation } from 'react-i18next';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { useChainContext } from '@/context/chain-context';
+import { useTheme } from '@/context/theme-context';
 import { CHAIN_METADATA } from '@/lib/chains';
 import type { Chain } from '@/types';
 import Image from 'next/image';
@@ -20,6 +21,7 @@ export default function ChooseNetwork({
 }: ChooseNetworkProps) {
   const { t } = useTranslation();
   const { changeChain } = useChainContext();
+  const { isLight } = useTheme();
 
   const handleChoice = (val: Chain) => {
     return (event: React.MouseEvent) => {
@@ -49,14 +51,22 @@ export default function ChooseNetwork({
       scanKey: 'choose-network.scans.arbitrum',
       scanUrl: 'https://arbiscan.io',
     },
+    {
+      id: 'base',
+      nameKey: 'choose-network.networks.base',
+      scanKey: 'choose-network.scans.base',
+      scanUrl: 'https://basescan.org',
+    },
   ];
 
   return (
     <div
-      className="absolute top-16 bg-white rounded-2xl min-w-[250px] min-h-40 p-4 z-50"
+      className={`absolute top-16 rounded-2xl min-w-[250px] min-h-40 p-4 z-50 ${
+        isLight ? 'bg-white' : 'bg-[#333333]'
+      }`}
       onMouseLeave={() => isChoosing(false)}
     >
-      <div className="w-full h-8 text-base text-gray-500">
+      <div className={`w-full h-8 text-base ${isLight ? 'text-gray-500' : 'text-[#A7A7A7]'}`}>
         {t('choose-network.select')}
       </div>
 
@@ -64,8 +74,10 @@ export default function ChooseNetwork({
         <div
           key={network.id}
           className={`w-full cursor-pointer rounded-lg ${
-            activeChain === network.id ? 'mb-3 p-4 bg-gray-100' : 'mb-4 p-2'
-          }`}
+            activeChain === network.id
+              ? isLight ? 'mb-3 p-4 bg-gray-100' : 'mb-3 p-4 bg-[#646464]'
+              : 'mb-4 p-2'
+          } ${isLight ? 'text-black' : 'text-white'}`}
         >
           <div
             className={`w-full flex items-center justify-between ${
@@ -94,10 +106,10 @@ export default function ChooseNetwork({
               rel="noreferrer"
               className="flex justify-between items-center w-full pl-1 hover:underline cursor-pointer"
             >
-              <span className="text-gray-500 text-xs font-semibold underline-offset-1 mr-1">
+              <span className={`text-xs font-semibold underline-offset-1 mr-1 ${isLight ? 'text-gray-500' : 'text-[#A7A7A7]'}`}>
                 {t(network.scanKey)}
               </span>
-              <ArrowTopRightOnSquareIcon className="w-4 h-4 text-gray-500" />
+              <ArrowTopRightOnSquareIcon className={`w-4 h-4 ${isLight ? 'text-gray-500' : 'text-[#A7A7A7]'}`} />
             </a>
           )}
         </div>

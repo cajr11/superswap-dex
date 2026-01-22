@@ -49,10 +49,10 @@ export default function SwapButton({
 }
 
 const styles = {
-  lightContainer: 'border-orange-300 h-16 w-full rounded-3xl',
-  darkContainer: 'border-blue-500 h-16 w-full rounded-3xl',
+  lightContainer: 'border-[#2CC295] h-16 w-full rounded-3xl',
+  darkContainer: 'border-[#2CC295] h-16 w-full rounded-3xl',
   lightButton:
-    'h-full w-full rounded-3xl flex justify-center items-center bg-orange-500 text-white font-semibold cursor-pointer',
+    'h-full w-full rounded-3xl flex justify-center items-center bg-[#2CC295] text-white font-semibold cursor-pointer hover:bg-[#03624C] transition-colors',
   darkButton:
-    'h-full w-full rounded-3xl flex justify-center items-center bg-blue-500 text-white font-semibold cursor-pointer',
+    'h-full w-full rounded-3xl flex justify-center items-center bg-[#2CC295] text-white font-semibold cursor-pointer hover:bg-[#03624C] transition-colors',
 };
