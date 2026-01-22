@@ -1,0 +1,64 @@
+{
+  "swap_form": {
+    "swap": "Swap",
+    "select": "Select a token",
+    "insufficient": "Insufficient {{token}} balance",
+    "connect": "Connect Wallet",
+    "placeholder": "0.0",
+    "estimated": "Estimated gas fees: "
+  },
+  "nav": {
+    "swap": "Swap",
+    "transactions": "Transactions",
+    "connect": "Connect Wallet",
+    "dropdown": {
+      "language": "Language",
+      "dark": "Dark Theme",
+      "light": "Light Theme"
+    },
+    "language": {
+      "english": "English",
+      "spanish": "Español"
+    }
+  },
+  "choose-token": {
+    "swap": "Select a token",
+    "search": "Search name or paste address"
+  },
+  "choose-network": {
+    "select": "Select a network",
+    "networks": {
+      "eth": "Ethereum",
+      "matic": "Polygon",
+      "arbitrum": "Arbitrum"
+    },
+    "scans": {
+      "eth": "Etherscan",
+      "matic": "Polygonscan",
+      "arbitrum": "Arbiscan"
+    }
+  },
+  "login": {
+    "account": "Account",
+    "authenticate": "Authenticating...",
+    "connect": "Connect a wallet",
+    "connected": "Connected with {{ wallet }}",
+    "disconnect": "Disconnect",
+    "metamask": "Metamask",
+    "wc": "WalletConnect",
+    "copy": "Copy Address",
+    "copied": "Copied",
+    "view": "View on Explorer"
+  },
+  "transaction": {
+    "submitted": "Transaction Submitted",
+    "view": "View on Explorer",
+    "close": "Close"
+  },
+  "transactions": {
+    "connect": "Connect Wallet",
+    "hash": "Transaction Hash",
+    "no": "no.",
+    "transactions": "Transactions"
+  }
+}
