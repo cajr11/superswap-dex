@@ -1,79 +1,134 @@
-# Superswap Dex
+# Superswap
 
-A multi-chain decentralised exchange(DEX) where users can authenticate themselves using Metamask or Wallet connect, across web and mobile in order to swap/buy tokens on the blockchain.
+A multi-chain decentralized exchange (DEX) that enables users to swap tokens across Ethereum, Polygon, and Arbitrum networks. Superswap provides a seamless trading experience with real-time price quotes, gas estimation, and transaction history tracking.
 
-## Demo
+## Overview
 
-![](/src/assets/images/demo.gif)
+Superswap aggregates liquidity from multiple decentralized exchanges to find optimal swap rates for users. The application connects to users' wallets through WalletConnect or browser extensions, allowing them to execute token swaps directly from their self-custodial wallets. All transactions are processed on-chain with full transparency.
 
+## Architecture
 
-
-#### Live application link
-
-```
-https://superswap-dex.vercel.app/
-```
-
-
-
-## Stack
-
-<div style="display: flex; width: 300px justify-content: space-between;">
-    <img src="https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-png-transparent.png" alt="react" width="50" height="50">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png" alt="tailwind css" width="50" height="50">
-    <img src="https://moralis.io/wp-content/uploads/2021/06/cropped-Moralis-Favicon-Glass.png" alt="moralis" width="50" height="50">
-</div>
-
-
-## Usage
-
-**NOTE** - For users to exchange/buy tokens and access wallet details and view transactions, the MetaMask extension(web) or app(mobile) should be installed. Alternatively any of the wallets that WalletConnect provides should also be installed on their devices.
-
-### Exchange/Buy
-
-![](/src/assets/images/transfer-demo.gif)
-
-In order to exchange tokens on superswap, users need to authenticate themselves as shown in the demo above. Upon authentication, users can switch chains between bsc, eth(default) and polygon. Once a desired chain has been selected, users can select then select the tokens they wish to exchange by clicking on the token logo in the input fields.
-
-After token selection, amounts can be input which will be automatically converted to the desired currency's amount, along with a gas fee estimat at the bottom. To complete the transaction, click the swap button and wait for your wallet to request approval to sign off on the transaction.
-
-
-### Language
-
-![](/src/assets/images/translation.gif)
-
-The app offers a language feature. The language can be toggled between English and Spanish.
-
-
-
-### Theme
-
-![](/src/assets/images/theme.gif)
-
-The has a themeing feature which allows day oe night selection
-
-
-## Running Locally
-
-### Installation Steps
+The application is built as a Next.js application with server-side API routes for secure external service communication:
 
 ```
-yarn install
+superswap-dex/
+├── app/                    # Next.js App Router pages and API routes
+│   ├── api/               # Server-side API routes for 1inch and Alchemy
+│   ├── transactions/      # Transaction history page
+│   └── page.tsx           # Main swap interface
+├── components/            # React components
+│   ├── NavBar/           # Navigation and network selection
+│   ├── SwapForm/         # Token swap interface
+│   └── UI/               # Modals and shared components
+├── hooks/                 # Custom React hooks for Web3 interactions
+├── lib/                   # Configuration and utilities
+├── context/              # React context providers
+├── providers/            # Web3 and theme providers
+└── types/                # TypeScript type definitions
 ```
-then
 
-```
-yarn start
-```
+## Key Features
+
+- Multi-chain support for Ethereum, Polygon, and Arbitrum networks
+- DEX aggregation for optimal swap rates and minimal slippage
+- Real-time price quotes with gas fee estimation
+- Transaction history tracking via Alchemy
+- Wallet connection through RainbowKit (MetaMask, WalletConnect, Coinbase Wallet)
+- Network switching with automatic wallet prompts
+- Internationalization (English and Spanish)
+- Light and dark theme support
+- Responsive design for mobile and desktop
+
+## Technology Stack
+
+**Framework:**
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+
+**Web3:**
+- wagmi v2
+- viem
+- RainbowKit
+
+**Services:**
+- Alchemy SDK (RPC and transaction history)
+- 1inch API (DEX aggregation)
+
+**Styling:**
+- Tailwind CSS
+- Heroicons
+
+**State Management:**
+- TanStack Query
+- React Context
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 20.9 or higher
+- pnpm, npm, or yarn
 
 ### Environment Variables
 
-A .env file will need to be created at the highest level of the project folder, within this file 3 environment variables will need to be created. These will be for the moralis server url, app id and web key which is used to initialise your dapp. Can be retrieved from your moralis account.
+Create a `.env.local` file in the project root:
 
 ```
-REACT_APP_SERVER_URL_MORALIS=key
-REACT_APP_ID_MORALIS=id
-REACT_APP_WEB_API_KEY=key
+NEXT_PUBLIC_ALCHEMY_API_KEY=your_alchemy_api_key
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
+ONEINCH_API_KEY=your_1inch_api_key
 ```
 
-**NOTE** - This dapp uses V1 of the moralis react SDK.
+**Obtaining API Keys:**
+
+- **Alchemy:** Create an account at [alchemy.com](https://www.alchemy.com/) and create a new app
+- **WalletConnect:** Register at [cloud.walletconnect.com](https://cloud.walletconnect.com/) and create a new project
+- **1inch:** Register at [portal.1inch.dev](https://portal.1inch.dev/) to obtain API access
+
+### Installation
+
+```bash
+pnpm install
+```
+
+### Development
+
+```bash
+pnpm dev
+```
+
+The application will be available at `http://localhost:3000`.
+
+### Production Build
+
+```bash
+pnpm build
+pnpm start
+```
+
+## Usage
+
+### Connecting a Wallet
+
+Click "Connect Wallet" in the navigation bar to open the wallet selection modal. Select your preferred wallet provider and approve the connection request in your wallet.
+
+### Swapping Tokens
+
+1. Select the source token and enter the amount to swap
+2. Select the destination token
+3. Review the quoted output amount and estimated gas fees
+4. Click "Swap" and confirm the transaction in your wallet
+5. Wait for the transaction to be confirmed on-chain
+
+### Switching Networks
+
+Hover over the network selector in the navigation bar to switch between Ethereum, Polygon, and Arbitrum. Your wallet will prompt you to approve the network change.
+
+### Viewing Transaction History
+
+Navigate to the Transactions page to view your recent transactions on the selected network.
+
+## License
+
+MIT
