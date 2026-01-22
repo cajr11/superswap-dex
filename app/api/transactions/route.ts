@@ -15,9 +15,9 @@ export async function GET(request: NextRequest) {
   }
 
   // Validate chain
-  if (!['eth', 'polygon', 'arbitrum'].includes(chain)) {
+  if (!['eth', 'polygon', 'arbitrum', 'base'].includes(chain)) {
     return NextResponse.json(
-      { error: 'Invalid chain. Must be eth, polygon, or arbitrum' },
+      { error: 'Invalid chain. Must be eth, polygon, arbitrum, or base' },
       { status: 400 }
     );
   }

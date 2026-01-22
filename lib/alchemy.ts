@@ -5,6 +5,7 @@ const NETWORK_MAP: Record<Chain, Network> = {
   eth: Network.ETH_MAINNET,
   polygon: Network.MATIC_MAINNET,
   arbitrum: Network.ARB_MAINNET,
+  base: Network.BASE_MAINNET,
 };
 
 export function getAlchemyClient(chain: Chain): Alchemy {

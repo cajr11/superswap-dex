@@ -11,7 +11,7 @@ export type TokenDetails = {
 
 export type TokenList = TokenDetails[];
 
-export type Chain = 'eth' | 'polygon' | 'arbitrum';
+export type Chain = 'eth' | 'polygon' | 'arbitrum' | 'base';
 
 export type SelectedToken = {
   name?: string;
@@ -38,6 +38,7 @@ export const CHAIN_IDS = {
   eth: 1,
   polygon: 137,
   arbitrum: 42161,
+  base: 8453,
 } as const;
 
 // native token addresses for 1inch
@@ -48,4 +49,5 @@ export const BLOCK_EXPLORERS = {
   eth: 'https://etherscan.io',
   polygon: 'https://polygonscan.com',
   arbitrum: 'https://arbiscan.io',
+  base: 'https://basescan.org',
 } as const;

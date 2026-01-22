@@ -1,4 +1,4 @@
-import { mainnet, polygon, arbitrum } from 'wagmi/chains';
+import { mainnet, polygon, arbitrum, base } from 'wagmi/chains';
 import type { Chain } from '@/types';
 
 // map app chain type to wagmi chain IDs
@@ -6,6 +6,7 @@ export const CHAIN_MAP = {
   eth: mainnet.id,
   polygon: polygon.id,
   arbitrum: arbitrum.id,
+  base: base.id,
 } as const;
 
 // 1inch API config
@@ -13,6 +14,7 @@ export const ONEINCH_CHAIN_IDS = {
   eth: 1,
   polygon: 137,
   arbitrum: 42161,
+  base: 8453,
 } as const;
 
 // chain metadata
@@ -35,6 +37,12 @@ export const CHAIN_METADATA = {
     logo: '/images/arbitrum.svg',
     explorer: 'https://arbiscan.io',
   },
+  base: {
+    name: 'Base',
+    symbol: 'ETH',
+    logo: '/images/base.svg',
+    explorer: 'https://basescan.org',
+  },
 } as const;
 
 /**
@@ -48,6 +56,8 @@ export function getWagmiChain(chain: Chain) {
       return polygon;
     case 'arbitrum':
       return arbitrum;
+    case 'base':
+      return base;
     default:
       return mainnet;
   }
@@ -64,6 +74,8 @@ export function getChainFromId(chainId: number): Chain {
       return 'polygon';
     case arbitrum.id:
       return 'arbitrum';
+    case base.id:
+      return 'base';
     default:
       return 'eth';
   }
