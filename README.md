@@ -129,6 +129,12 @@ Hover over the network selector in the navigation bar to switch between Ethereum
 
 Navigate to the Transactions page to view your recent transactions on the selected network.
 
+## Demo
+
+| UI | Transactions |
+|-----------|-------------|
+|  ![basic demo](https://github.com/user-attachments/assets/e4523271-0258-409a-9de8-fd798ac252a5) | ![txn-demo](https://github.com/user-attachments/assets/1eb74039-1d74-4e3b-ab56-39b07554906c) |
+
 ## License
 
 MIT
