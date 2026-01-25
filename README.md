@@ -129,6 +129,12 @@ Hover over the network selector in the navigation bar to switch between Ethereum
 
 Navigate to the Transactions page to view your recent transactions on the selected network.
 
+## Demo
+
+| Live Site | Source Code |
+|-----------|-------------|
+| [superswap-dex.vercel.app](https://superswap-dex.vercel.app) | [github.com/cajr11/superswap-dex](https://github.com/cajr11/superswap-dex) |
+
 ## License
 
 MIT
